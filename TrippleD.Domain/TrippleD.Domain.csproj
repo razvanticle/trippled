@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TrippleD.Persistence\TrippleD.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿using TrippleD.Domain.SharedKernel;
 
-namespace TrippleD.Domain.Company
+namespace TrippleD.Domain.Company.Model
 {
     public class Service : ValueObjectBase<Service>
     {
@@ -13,5 +13,10 @@ namespace TrippleD.Domain.Company
         public string Name { get; }
 
         public decimal Rating { get; }
+
+        public Service Rate()
+        {
+            return new Service(Name, Rating + 1);
+        }
     }
 }
