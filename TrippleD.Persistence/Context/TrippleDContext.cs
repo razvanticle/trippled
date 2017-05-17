@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TripleD.Persistence.Model;
+using TrippleD.Persistence.Model;
 
-namespace TripleD.Persistence.Context
+namespace TrippleD.Persistence.Context
 {
     public class TrippleDContext : DbContext
     {

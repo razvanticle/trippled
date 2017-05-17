@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TripleD.Persistence.Model
+namespace TrippleD.Persistence.Model
 {
     public class Address
     {

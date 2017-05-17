@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace TripleD.Persistence.Repository
+namespace TrippleD.Persistence.Repository
 {
     public interface IRepository : IDisposable
     {

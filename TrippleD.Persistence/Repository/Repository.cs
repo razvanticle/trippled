@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using TripleD.Persistence.Context;
+using TrippleD.Persistence.Context;
 
-namespace TripleD.Persistence.Repository
+namespace TrippleD.Persistence.Repository
 {
     public class Repository : IRepository
     {
