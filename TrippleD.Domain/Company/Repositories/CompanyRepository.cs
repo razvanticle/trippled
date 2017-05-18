@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using TrippleD.Core;
 using TrippleD.Domain.Company.Model;
 using TrippleD.Domain.SharedKernel;
 using TrippleD.Persistence.Repository;
@@ -18,6 +19,7 @@ namespace TrippleD.Domain.Company.Repositories
         void UpdateCompany(Model.Company company);
     }
 
+    [Service(typeof(ICompanyRepository))]
     public class CompanyRepository : ICompanyRepository
     {
         private readonly IRepository repository;
