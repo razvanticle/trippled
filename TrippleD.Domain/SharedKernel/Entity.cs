@@ -6,15 +6,15 @@ namespace TrippleD.Domain.SharedKernel
     {
         protected Entity(TId id)
         {
-            if (Object.Equals(id, default(TId)))
+            if (Equals(id, default(TId)))
             {
                 throw new ArgumentException("The ID cannot be the type's default value.", "id");
             }
 
             Id = id;
         }
-
-        public TId Id { get; protected set; }
+        
+        public TId Id { get; }
 
         public override bool Equals(object otherObject)
         {

@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using TrippleD.Core;
 using TrippleD.Domain.SharedKernel.Events;
+using TrippleD.Persistence.Model;
 
 namespace TrippleD.Domain.Company.Events
 {
@@ -15,6 +17,7 @@ namespace TrippleD.Domain.Company.Events
         public int CompanyId { get; }
     }
 
+    [Service(typeof(IDomainEventHandler<ComanyRatingUpdatedEvent>))]
     public class ComanyRatingUpdatedEventHandler : IDomainEventHandler<ComanyRatingUpdatedEvent>
     {
         public void Handle(ComanyRatingUpdatedEvent args)

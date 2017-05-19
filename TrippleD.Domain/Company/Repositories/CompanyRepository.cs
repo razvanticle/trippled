@@ -4,27 +4,25 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using TrippleD.Core;
 using TrippleD.Domain.Company.Model;
-using TrippleD.Domain.SharedKernel;
+using TrippleD.Domain.SharedKernel.EventDispatcher;
+using TrippleD.Domain.SharedKernel.Model;
+using TrippleD.Domain.SharedKernel.Repositories;
 using TrippleD.Persistence.Repository;
 
 namespace TrippleD.Domain.Company.Repositories
 {
-    public interface IEntityRepository<TEntity, TKey> where TEntity : Entity<TKey>
-    {
-    }
-
-    public interface ICompanyRepository : IEntityRepository<Model.Company, int>
+    public interface ICompanyRepository
     {
         IEnumerable<Model.Company> GetCompanies();
         void UpdateCompany(Model.Company company);
     }
 
     [Service(typeof(ICompanyRepository))]
-    public class CompanyRepository : ICompanyRepository
+    public class CompanyRepository : EntityRepository<Model.Company, int>, ICompanyRepository
     {
         private readonly IRepository repository;
 
-        public CompanyRepository(IRepository repository)
+        public CompanyRepository(IRepository repository, IDomainEventDispatcher dispatcher) : base(dispatcher)
         {
             this.repository = repository;
         }
@@ -67,6 +65,8 @@ namespace TrippleD.Domain.Company.Repositories
             dbCompany.Address.Street = company.Address.Street;
 
             repository.Update(dbCompany);
+            DispatchEvents(company);
+
             repository.SaveChanges();
         }
     }

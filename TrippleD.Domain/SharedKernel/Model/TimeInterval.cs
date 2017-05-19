@@ -1,4 +1,4 @@
-﻿namespace TrippleD.Domain.SharedKernel
+﻿namespace TrippleD.Domain.SharedKernel.Model
 {
     public class TimeInterval : ValueObjectBase<TimeInterval>
     {

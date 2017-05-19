@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using TrippleD.Domain.Company.Events;
 using TrippleD.Domain.SharedKernel;
-using TrippleD.Domain.SharedKernel.Events;
+using TrippleD.Domain.SharedKernel.Model;
 
 namespace TrippleD.Domain.Company.Model
 {
-    public class Company : Entity<int>
+    public class Company : AggregateRoot<int>
     {
         public Company(int id) : base(id)
         {
-            // todo add proper DI and remove this
-            DomainEvents.Register<ComanyRatingUpdatedEvent>(new ComanyRatingUpdatedEventHandler().Handle);
         }
 
         public Address Address { get; set; }
@@ -34,9 +32,9 @@ namespace TrippleD.Domain.Company.Model
         public void RateCompany(int value)
         {
             // todo
-            this.Rating = (Rating + value) / 2;
+            Rating = (Rating + value) / 2;
 
-            DomainEvents.Raise(new ComanyRatingUpdatedEvent(Rating, Id));
+            AddEvent(new ComanyRatingUpdatedEvent(Rating, Id));
         }
 
         public void RateService(Service service)
