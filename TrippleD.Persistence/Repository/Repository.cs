@@ -1,51 +1,55 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using TrippleD.Persistence.Context;
 
 namespace TrippleD.Persistence.Repository
 {
-    public class Repository : IRepository
+    /// <summary>
+    ///     Implements a repository for reading data with Entity Framework
+    ///     The entities retrieved through this repository are not meant to be modified and persisted back.
+    ///     This implementation is optimized for read-only operations. For reading data for edit, or delete create and use an
+    ///     IUnitOfWork
+    /// </summary>
+    public class Repository : IRepository, IDisposable
     {
-        private readonly TrippleDContext context;
+        private readonly IContextProvider contextProvider;
 
-        public Repository(TrippleDContext context)
+
+        public Repository(IContextProvider contextProvider)
         {
-            this.context = context;
+            this.contextProvider = contextProvider;
+            Context = contextProvider.GetDbContext();
         }
 
-        public void Add<T>(T entity) where T : class
-        {
-            context.Entry(entity).State = EntityState.Added;
-        }
+        protected DbContext Context { get; }
 
-        public void Delete<T>(T entity) where T : class
+        public IUnitOfWork CreateUnitOfWork()
         {
-            context.Entry(entity).State = EntityState.Deleted;
+            return new UnitOfWork(contextProvider);
         }
 
         public void Dispose()
         {
-            context.Dispose();
-        }
-
-        public T GetById<T>(params object[] keyValues) where T : class
-        {
-            return context.Set<T>().Find(keyValues);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public IQueryable<T> GetEntities<T>() where T : class
         {
-            return context.Set<T>();
+            return Context.Set<T>().AsNoTracking();
         }
 
-        public void SaveChanges()
+        protected virtual void Dispose(bool disposing)
         {
-            context.SaveChanges();
+            if (disposing)
+            {
+                Context?.Dispose();
+            }
         }
+    }
 
-        public void Update<T>(T entity) where T : class
-        {
-            context.Entry(entity).State = EntityState.Modified;
-        }
+    public interface IContextProvider
+    {
+        DbContext GetDbContext();
     }
 }

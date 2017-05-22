@@ -2,6 +2,11 @@
 {
     public class Address : ValueObjectBase<Address>
     {
+        public Address()
+        {
+
+        }
+
         public Address(string city, string number, string street)
         {
             City = city;
@@ -9,11 +14,11 @@
             Street = street;
         }
 
-        public string City { get; }
+        public string City { get; private set; }
 
-        public string Number { get; }
+        public string Number { get; private set; }
 
-        public string Street { get; }
+        public string Street { get; private set; }
 
         public Address SetCity(string city)
         {

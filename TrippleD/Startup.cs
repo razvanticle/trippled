@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TrippleD.Domain.Company.Repositories;
+using TrippleD.Domain.Company.Model;
 using TrippleD.Persistence.Context;
 using TrippleD.ServicesConfiguration.Extensions;
 using TrippleD.ServicesConfiguration.RegistrationStrategies;
@@ -60,7 +60,7 @@ namespace TrippleD
             services.AddDbContext<TrippleDContext>(opt => opt.UseInMemoryDatabase());
             services.AddMvc();
 
-            var assemblies = new List<Assembly> {typeof(CompanyRepository).GetTypeInfo().Assembly};
+            var assemblies = new List<Assembly> {typeof(Company).GetTypeInfo().Assembly};
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);

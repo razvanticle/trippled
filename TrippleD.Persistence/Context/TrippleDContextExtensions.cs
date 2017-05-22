@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using TrippleD.Persistence.Model;
+using TrippleD.Domain.Company.Model;
+using TrippleD.Domain.SharedKernel.Model;
 
 namespace TrippleD.Persistence.Context
 {
@@ -11,55 +11,24 @@ namespace TrippleD.Persistence.Context
         {
             if (!context.Companies.Any())
             {
-                context.Companies.AddRange(new Company
+                context.Companies.AddRange(new Company(1)
                     {
-                        Id = 1,
                         Name = "Company 1",
-                        Address = new Address
-                        {
-                            Id = 1,
-                            Street = "Garibaldi",
-                            City = "Cluj-Napoca",
-                            Number = "25"
-                        },
+                        Address = new Address("Cluj", "5", "Garibaldi"),
                         Rating = 5,
-                        OpenTime = new DateTime(1800, 01, 01, 8, 0, 0),
-                        CloseTime = new DateTime(1800, 01, 01, 20, 0, 0),
+                        BusinessHours = new TimeInterval(new Time(8, 0), new Time(17, 0)),
                         Email = "company@comany.com",
                         PhoneNumber = "123",
                         WebSite = "www.company",
                         Services = new List<Service>
                         {
-                            new Service
-                            {
-                                Id = 1,
-                                Rating = 4,
-                                Name = "service 1"
-                            },
-                            new Service
-                            {
-                                Id = 2,
-                                Rating = 3,
-                                Name = "service 2"
-                            },
-                            new Service
-                            {
-                                Id = 3,
-                                Rating = 5,
-                                Name = "service 3"
-                            }
+                            new Service("service 1", 4),
+                            new Service("service 2", 3),
+                            new Service("service 3", 5)
                         }
                     },
-                    new Company
-                    {
-                        Id = 2,
-                        Name = "Company 2"
-                    },
-                    new Company
-                    {
-                        Id = 3,
-                        Name = "Company 3"
-                    });
+                    new Company(2) {Name = "Company 2"},
+                    new Company(3) {Name = "Company 3"});
 
                 context.SaveChanges();
             }

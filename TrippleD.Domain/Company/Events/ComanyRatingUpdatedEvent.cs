@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using TrippleD.Core;
 using TrippleD.Domain.SharedKernel.Events;
-using TrippleD.Persistence.Model;
 
 namespace TrippleD.Domain.Company.Events
 {

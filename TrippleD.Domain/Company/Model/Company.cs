@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using TrippleD.Domain.Company.Events;
 using TrippleD.Domain.SharedKernel;
@@ -9,6 +10,11 @@ namespace TrippleD.Domain.Company.Model
 {
     public class Company : AggregateRoot<int>
     {
+        public Company()
+        {
+
+        }
+
         public Company(int id) : base(id)
         {
         }
@@ -25,7 +31,7 @@ namespace TrippleD.Domain.Company.Model
 
         public decimal Rating { get; set; }
 
-        public IEnumerable<Service> Services { get; set; }
+        public IList<Service> Services { get; set; }
 
         public string WebSite { get; set; }
 
@@ -35,6 +41,13 @@ namespace TrippleD.Domain.Company.Model
             Rating = (Rating + value) / 2;
 
             AddEvent(new ComanyRatingUpdatedEvent(Rating, Id));
+        }
+
+        public void RemoveService(string serviceName)
+        {
+            var service = Services.FirstOrDefault(x => x.Name == serviceName);
+
+            this.Services.Remove(service);
         }
 
         public void RateService(Service service)
