@@ -1,27 +1,25 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using TrippleD.Companies.Dtos;
+using TrippleD.Core.Extensions;
+using TrippleD.Core.Mappers;
 using TrippleD.Domain.Company.Model;
 using TrippleD.Persistence.Repository;
 
-namespace TrippleD.Controllers
+namespace TrippleD.Companies
 {
-    [Route("api/[controller]")]
+    [Route("api/companies")]
     public class CompaniesController : Controller
     {
+        private readonly IMapper mapper;
         private readonly IEntityRepository<Company, int> repository;
 
-        public CompaniesController(IEntityRepository<Company, int> repository)
+        public CompaniesController(IEntityRepository<Company, int> repository, IMapper mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
-        // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,20 +29,20 @@ namespace TrippleD.Controllers
             return Ok(companies);
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id}/services")]
+        public IActionResult GetCompanyServices(int id)
         {
-            return "value";
+            var company = repository.GetEntities().FirstOrDefault(x => x.Id == id);
+            if (company == null)
+            {
+                return NotFound($"Company with id {id} was not found");
+            }
+
+            var services = company.Services.Select(mapper.Map<Service, ServiceDto>);
+
+            return Ok(services);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] int value)
         {
@@ -54,8 +52,7 @@ namespace TrippleD.Controllers
             company.RateCompany(value);
             company.RemoveService("service 2");
             repository.Update(company);
-
-
+            
             return Ok();
         }
     }

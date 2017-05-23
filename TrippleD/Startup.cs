@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -8,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using TrippleD.Domain.Company.Model;
 using TrippleD.Persistence.InMemoryStore;
 using TrippleD.ServicesConfiguration.Extensions;
 using TrippleD.ServicesConfiguration.RegistrationStrategies;
@@ -58,11 +55,7 @@ namespace TrippleD
         {
             services.AddMvc();
 
-            var assemblies = new List<Assembly>
-            {
-                typeof(Company).GetTypeInfo().Assembly,
-                typeof(InMemoryStore).GetTypeInfo().Assembly
-            };
+            var assemblies = AssemblyLoader.GetReferencingAssemblies("TrippleD");
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
@@ -70,9 +63,10 @@ namespace TrippleD
             ApplicationContainer = containerBuilder
                 .Execute<PersistenceRegistrationStrategy>()
                 .Execute(() => ServicesRegistrationStrategy.Create(assemblies))
+                .Execute(()=>MappersRegistrationStrategy.Create(assemblies))
                 .Build();
 
-            return new AutofacServiceProvider(ApplicationContainer);
+            return new AutofacServiceProvider(ApplicationContainer); 
         }
     }
 }

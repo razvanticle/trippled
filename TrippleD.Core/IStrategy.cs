@@ -2,6 +2,6 @@
 {
     public interface IStrategy<in T>
     {
-        void Execute(T inut);
+        void Execute(T input);
     }
 }
