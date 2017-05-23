@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TrippleD.Domain.Company.Model;
 using TrippleD.Domain.SharedKernel.Model;
 
-namespace TrippleD.Persistence.Context
+namespace TrippleD.Persistence.InMemoryStore
 {
-    public static class TrippleDContextExtensions
+    public static class InMemoryStoreExtensions
     {
-        public static void EnsureSeedData(this TrippleDContext context)
+        public static void EnsureSeedData(this InMemoryStore store)
         {
-            if (!context.Companies.Any())
+            if (!store.Any<Company>())
             {
-                context.Companies.AddRange(new Company(1)
+                store.AddRange(new Company(1)
                     {
                         Name = "Company 1",
                         Address = new Address("Cluj", "5", "Garibaldi"),
@@ -27,10 +26,8 @@ namespace TrippleD.Persistence.Context
                             new Service("service 3", 5)
                         }
                     },
-                    new Company(2) {Name = "Company 2"},
-                    new Company(3) {Name = "Company 3"});
-
-                context.SaveChanges();
+                    new Company(2) { Name = "Company 2" },
+                    new Company(3) { Name = "Company 3" });
             }
         }
     }

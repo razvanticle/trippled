@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using TrippleD.Domain.Company.Events;
 using TrippleD.Domain.SharedKernel;
@@ -10,11 +9,6 @@ namespace TrippleD.Domain.Company.Model
 {
     public class Company : AggregateRoot<int>
     {
-        public Company()
-        {
-
-        }
-
         public Company(int id) : base(id)
         {
         }
@@ -43,13 +37,6 @@ namespace TrippleD.Domain.Company.Model
             AddEvent(new ComanyRatingUpdatedEvent(Rating, Id));
         }
 
-        public void RemoveService(string serviceName)
-        {
-            var service = Services.FirstOrDefault(x => x.Name == serviceName);
-
-            this.Services.Remove(service);
-        }
-
         public void RateService(Service service)
         {
             // todo
@@ -60,6 +47,13 @@ namespace TrippleD.Domain.Company.Model
             }
 
             serviceToRate = service.Rate();
+        }
+
+        public void RemoveService(string serviceName)
+        {
+            var service = Services.FirstOrDefault(x => x.Name == serviceName);
+
+            Services.Remove(service);
         }
 
         public void RequestService()

@@ -4,11 +4,6 @@ namespace TrippleD.Domain.SharedKernel
 {
     public abstract class Entity<TId> : IEquatable<Entity<TId>>
     {
-        protected Entity()
-        {
-
-        }
-
         protected Entity(TId id)
         {
             if (Equals(id, default(TId)))
@@ -19,7 +14,7 @@ namespace TrippleD.Domain.SharedKernel
             Id = id;
         }
         
-        public TId Id { get; private set; }
+        public TId Id { get; }
 
         public override bool Equals(object otherObject)
         {

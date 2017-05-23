@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TrippleD.Core.Extensions;
 using TrippleD.Domain.Company.Model;
 using TrippleD.Persistence.Repository;
 
@@ -10,9 +8,9 @@ namespace TrippleD.Controllers
     [Route("api/[controller]")]
     public class CompaniesController : Controller
     {
-        private readonly IRepository repository;
+        private readonly IEntityRepository<Company, int> repository;
 
-        public CompaniesController(IRepository repository)
+        public CompaniesController(IEntityRepository<Company, int> repository)
         {
             this.repository = repository;
         }
@@ -27,8 +25,7 @@ namespace TrippleD.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var companies = repository.GetEntities<Company>()
-                .Include(x=>x.Services)
+            var companies = repository.GetEntities()
                 .ToList();
 
             return Ok(companies);
@@ -51,17 +48,13 @@ namespace TrippleD.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] int value)
         {
-            Disposable.Using(repository.CreateUnitOfWork,
-                uow =>
-                {
-                    var company = uow.GetEntities<Company>()
-                        .Include(x => x.Services)
-                        .FirstOrDefault(x => x.Id == id);
-                    company.RateCompany(value);
-                    company.RemoveService("service 2");
+            var company = repository.GetEntities()
+                .FirstOrDefault(x => x.Id == id);
 
-                    uow.SaveChanges();
-                });
+            company.RateCompany(value);
+            company.RemoveService("service 2");
+            repository.Update(company);
+
 
             return Ok();
         }

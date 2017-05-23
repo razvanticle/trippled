@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrippleD.Core.Extensions
+namespace TrippleD.Core
 {
     public static class Disposable
     {

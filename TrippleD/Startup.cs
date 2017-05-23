@@ -5,12 +5,11 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TrippleD.Domain.Company.Model;
-using TrippleD.Persistence.Context;
+using TrippleD.Persistence.InMemoryStore;
 using TrippleD.ServicesConfiguration.Extensions;
 using TrippleD.ServicesConfiguration.RegistrationStrategies;
 
@@ -41,8 +40,8 @@ namespace TrippleD
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                     .CreateScope())
                 {
-                    var context = serviceScope.ServiceProvider.GetService<TrippleDContext>();
-                    context.EnsureSeedData();
+                    var store = serviceScope.ServiceProvider.GetService<InMemoryStore>();
+                    store.EnsureSeedData();
                 }
             }
 
@@ -57,10 +56,13 @@ namespace TrippleD
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TrippleDContext>(opt => opt.UseInMemoryDatabase());
             services.AddMvc();
 
-            var assemblies = new List<Assembly> {typeof(Company).GetTypeInfo().Assembly};
+            var assemblies = new List<Assembly>
+            {
+                typeof(Company).GetTypeInfo().Assembly,
+                typeof(InMemoryStore).GetTypeInfo().Assembly
+            };
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);

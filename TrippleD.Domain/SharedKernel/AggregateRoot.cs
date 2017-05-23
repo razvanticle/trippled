@@ -6,12 +6,7 @@ namespace TrippleD.Domain.SharedKernel
     public class AggregateRoot<TId> : Entity<TId>
     {
         private readonly IList<IDomainEvent> domainEvents;
-
-        public AggregateRoot()
-        {
-            domainEvents = new List<IDomainEvent>();
-        }
-
+        
         public AggregateRoot(TId id) : base(id)
         {
             domainEvents = new List<IDomainEvent>();

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TrippleD.Core;
-using TrippleD.Domain.Company.Model;
 using TrippleD.Domain.SharedKernel;
 using TrippleD.Domain.SharedKernel.EventDispatcher;
 
@@ -9,30 +8,42 @@ namespace TrippleD.Persistence.Repository
     public abstract class EntityRepository<TEntity, TKey> : IEntityRepository<TEntity, TKey>
         where TEntity : AggregateRoot<TKey>
     {
+        private readonly InMemoryStore.InMemoryStore store;
         protected readonly IDomainEventDispatcher Dispatcher;
 
-        private readonly IList<TEntity> entities = new List<TEntity>();
-
-        protected EntityRepository(IDomainEventDispatcher dispatcher)
+        protected EntityRepository(InMemoryStore.InMemoryStore store, IDomainEventDispatcher dispatcher)
         {
+            this.store = store;
             Dispatcher = dispatcher;
         }
 
         public void Add(TEntity entity)
         {
-            entities.Add(entity);
+            store.Add(entity);
+            DispatchEvents(entity);
+        }
+
+        public void Update(TEntity entity)
+        {
+            DispatchEvents(entity);
         }
 
         public void Delete(TEntity entity)
         {
-            entities.Remove(entity);
+            store.Delete(entity);
+            DispatchEvents(entity);
+        }
+
+        public IEnumerable<TEntity> GetEntities()
+        {
+            return GetEntities(null);
         }
 
         public IEnumerable<TEntity> GetEntities(SelectionCriteria<TEntity, TKey> criteria)
         {
-            return entities;
+            return store.GetEntities<TEntity>();
         }
-
+        
         protected void DispatchEvents(TEntity entity)
         {
             Guard.ArgNotNull(entity, nameof(entity));
@@ -42,23 +53,5 @@ namespace TrippleD.Persistence.Repository
                 Dispatcher.Dispatch(domainEvent);
             }
         }
-    }
-
-    public interface IEntityRepository<TEntity, TKey> where TEntity : AggregateRoot<TKey>
-    {
-        void Add(TEntity entity);
-
-        void Delete(TEntity entity);
-
-        IEnumerable<TEntity> GetEntities(SelectionCriteria<TEntity, TKey> criteria);
-    }
-
-    public class SelectionCriteria<TEntity, TKey> where TEntity : AggregateRoot<TKey>
-    {
-    }
-
-    public class InMemoryStore
-    {
-        public IEnumerable<Company> Companies { get; set; }
     }
 }
