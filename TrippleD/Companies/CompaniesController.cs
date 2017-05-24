@@ -24,13 +24,14 @@ namespace TrippleD.Companies
         public IActionResult Get()
         {
             var companies = repository.GetEntities()
+                .Select(mapper.Map<Company, CompanyDto>)
                 .ToList();
 
             return Ok(companies);
         }
 
-        [HttpGet("{id}/services")]
-        public IActionResult GetCompanyServices(int id)
+        [HttpGet("{id}")]
+        public IActionResult GetCompany(int id)
         {
             var company = repository.GetEntities().FirstOrDefault(x => x.Id == id);
             if (company == null)
@@ -38,9 +39,9 @@ namespace TrippleD.Companies
                 return NotFound($"Company with id {id} was not found");
             }
 
-            var services = company.Services.Select(mapper.Map<Service, ServiceDto>);
+            var companyDto = company.Execute(mapper.Map<Company, CompanyDto>);
 
-            return Ok(services);
+            return Ok(companyDto);
         }
 
         [HttpPut("{id}")]
@@ -52,7 +53,7 @@ namespace TrippleD.Companies
             company.RateCompany(value);
             company.RemoveService("service 2");
             repository.Update(company);
-            
+
             return Ok();
         }
     }

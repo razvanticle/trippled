@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using TrippleD.Domain.Company.Model;
+using TrippleD.Domain.Customers.Model;
+using TrippleD.Domain.SharedKernel;
 using TrippleD.Domain.SharedKernel.Model;
 
 namespace TrippleD.Persistence.InMemoryStore
@@ -28,6 +30,24 @@ namespace TrippleD.Persistence.InMemoryStore
                     },
                     new Company(2) { Name = "Company 2" },
                     new Company(3) { Name = "Company 3" });
+            }
+
+            if (!store.Any<Customer>())
+            {
+                store.AddRange(new Customer(1)
+                {
+                    Name = new Name("John", "Doe"),
+                    Email = "jdoe@gmail.com",
+                    MobilePhone = "123",
+                    Orders = new List<Order>
+                    {
+                        new Order(new Invoice(new Address("cluj", "5", "garibaldi")), new List<OrderItem>
+                        {
+                            new OrderItem(new Service("Service 1", 4), new Address("cluj", "5", "garibaldi"))
+                        }, 
+                        new PaymentMethod(PaymentMethodType.Cash))
+                    }
+                });
             }
         }
     }

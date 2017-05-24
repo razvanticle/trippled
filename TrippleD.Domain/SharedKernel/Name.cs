@@ -1,6 +1,4 @@
-﻿using TrippleD.Domain.SharedKernel;
-
-namespace TrippleD.Domain
+﻿namespace TrippleD.Domain.SharedKernel
 {
     public class Name : ValueObjectBase<Name>
     {
@@ -15,5 +13,10 @@ namespace TrippleD.Domain
         public string FullName => $"{FirstName} {LastName}";
 
         public string LastName { get; }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TrippleD.Domain
+﻿namespace TrippleD.Domain.Customers.Model
 {
     public enum PaymentMethodType
     {

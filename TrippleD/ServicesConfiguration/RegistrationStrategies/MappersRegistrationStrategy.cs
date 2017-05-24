@@ -24,7 +24,8 @@ namespace TrippleD.ServicesConfiguration.RegistrationStrategies
         public void Execute(ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterAssemblyTypes(assemblies.ToArray())
-                .AsClosedTypesOf(typeof(IMapper<,>)).AsImplementedInterfaces();
+                .AsClosedTypesOf(typeof(IMapper<,>)).AsImplementedInterfaces()
+                .SingleInstance();
         }
     }
 }

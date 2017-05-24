@@ -1,7 +1,7 @@
 ﻿using TrippleD.Domain.SharedKernel;
 using TrippleD.Domain.SharedKernel.Model;
 
-namespace TrippleD.Domain
+namespace TrippleD.Domain.Customers.Model
 {
     public class Invoice : ValueObjectBase<Invoice>
     {

@@ -63,10 +63,10 @@ namespace TrippleD
             ApplicationContainer = containerBuilder
                 .Execute<PersistenceRegistrationStrategy>()
                 .Execute(() => ServicesRegistrationStrategy.Create(assemblies))
-                .Execute(()=>MappersRegistrationStrategy.Create(assemblies))
+                .Execute(() => MappersRegistrationStrategy.Create(assemblies))
                 .Build();
 
-            return new AutofacServiceProvider(ApplicationContainer); 
+            return new AutofacServiceProvider(ApplicationContainer);
         }
     }
 }
