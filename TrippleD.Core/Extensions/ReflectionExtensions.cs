@@ -34,7 +34,7 @@ namespace TrippleD.Core.Extensions
             Func<TAttribute, TValue> accessor,
             TValue defaultValue = default(TValue)) where TAttribute : class
         {
-            var attribute = attributeProvider.GetAttribute<TAttribute>();
+            TAttribute attribute = attributeProvider.GetAttribute<TAttribute>();
             if (attribute != null)
             {
                 return accessor(attribute);
@@ -49,16 +49,16 @@ namespace TrippleD.Core.Extensions
         /// </summary>
         public static IEnumerable<PropertyInfo> GetEditableProperties(object instance)
         {
-            var properties =
+            IEnumerable<PropertyInfo> properties =
                 instance.GetType()
                     .GetMembers(BindingFlags.Public | BindingFlags.Instance)
                     .Select(m => m as PropertyInfo)
                     .Where(p => p != null);
 
-            foreach (var property in properties)
+            foreach (PropertyInfo property in properties)
             {
-                var getter = property.GetGetMethod();
-                var setter = property.GetSetMethod();
+                MethodInfo getter = property.GetGetMethod();
+                MethodInfo setter = property.GetSetMethod();
                 if (getter != null && setter != null)
                 {
                     yield return property;

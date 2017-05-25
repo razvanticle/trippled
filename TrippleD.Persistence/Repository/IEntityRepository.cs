@@ -3,7 +3,7 @@ using TrippleD.Domain.SharedKernel;
 
 namespace TrippleD.Persistence.Repository
 {
-    public interface IEntityRepository<TEntity, TKey> where TEntity : AggregateRoot<TKey>
+    public interface IEntityRepository<TEntity, in TKey> where TEntity : AggregateRoot<TKey>
     {
         void Add(TEntity entity);
 
@@ -11,8 +11,10 @@ namespace TrippleD.Persistence.Repository
 
         void Delete(TEntity entity);
 
+        TEntity GetEntity(ISpecification<TEntity> specification);
+
         IEnumerable<TEntity> GetEntities();
 
-        IEnumerable<TEntity> GetEntities(SelectionCriteria<TEntity, TKey> criteria);
+        IEnumerable<TEntity> GetEntities(ISpecification<TEntity> specification);
     }
 }

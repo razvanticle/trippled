@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +18,7 @@ namespace TrippleD
     {
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
+            IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
@@ -55,9 +57,9 @@ namespace TrippleD
         {
             services.AddMvc();
 
-            var assemblies = AssemblyLoader.GetReferencingAssemblies("TrippleD");
+            IEnumerable<Assembly> assemblies = AssemblyLoader.GetReferencingAssemblies("TrippleD");
 
-            var containerBuilder = new ContainerBuilder();
+            ContainerBuilder containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
 
             ApplicationContainer = containerBuilder

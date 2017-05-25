@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TrippleD.Companies.Dtos;
 using TrippleD.Core.Extensions;
@@ -23,7 +24,7 @@ namespace TrippleD.Companies
         [HttpGet]
         public IActionResult Get()
         {
-            var companies = repository.GetEntities()
+            List<CompanyDto> companies = repository.GetEntities()
                 .Select(mapper.Map<Company, CompanyDto>)
                 .ToList();
 
@@ -33,13 +34,13 @@ namespace TrippleD.Companies
         [HttpGet("{id}")]
         public IActionResult GetCompany(int id)
         {
-            var company = repository.GetEntities().FirstOrDefault(x => x.Id == id);
+            Company company = repository.GetEntities().FirstOrDefault(x => x.Id == id);
             if (company == null)
             {
                 return NotFound($"Company with id {id} was not found");
             }
 
-            var companyDto = company.Execute(mapper.Map<Company, CompanyDto>);
+            CompanyDto companyDto = company.Execute(mapper.Map<Company, CompanyDto>);
 
             return Ok(companyDto);
         }
@@ -47,7 +48,7 @@ namespace TrippleD.Companies
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] int value)
         {
-            var company = repository.GetEntities()
+            Company company = repository.GetEntities()
                 .FirstOrDefault(x => x.Id == id);
 
             company.RateCompany(value);

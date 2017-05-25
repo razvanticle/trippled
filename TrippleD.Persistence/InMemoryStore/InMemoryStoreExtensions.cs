@@ -28,26 +28,40 @@ namespace TrippleD.Persistence.InMemoryStore
                             new Service("service 3", 5)
                         }
                     },
-                    new Company(2) { Name = "Company 2" },
-                    new Company(3) { Name = "Company 3" });
+                    new Company(2) {Name = "Company 2"},
+                    new Company(3) {Name = "Company 3"});
             }
 
             if (!store.Any<Customer>())
             {
                 store.AddRange(new Customer(1)
-                {
-                    Name = new Name("John", "Doe"),
-                    Email = "jdoe@gmail.com",
-                    MobilePhone = "123",
-                    Orders = new List<Order>
                     {
-                        new Order(new Invoice(new Address("cluj", "5", "garibaldi")), new List<OrderItem>
+                        Name = new Name("John", "Doe"),
+                        Email = "jdoe@gmail.com",
+                        MobilePhone = "123",
+                        Orders = new List<Order>
                         {
-                            new OrderItem(new Service("Service 1", 4), new Address("cluj", "5", "garibaldi"))
-                        }, 
-                        new PaymentMethod(PaymentMethodType.Cash))
-                    }
-                });
+                            new Order(new Invoice(new Address("cluj", "5", "garibaldi")), new List<OrderItem>
+                                {
+                                    new OrderItem(new Service("Service 1", 4), new Address("cluj", "5", "garibaldi"))
+                                },
+                                new PaymentMethod(PaymentMethodType.Cash))
+                        }
+                    },
+                    new Customer(2)
+                    {
+                        Name = new Name("Jane", "Doe"),
+                        Email = "janedoe@gmail.com",
+                        MobilePhone = "1232",
+                        Orders = new List<Order>
+                        {
+                            new Order(new Invoice(new Address("cluj", "5", "garibaldi")), new List<OrderItem>
+                                {
+                                    new OrderItem(new Service("Service 2", 4), new Address("cluj", "5", "garibaldi"))
+                                },
+                                new PaymentMethod(PaymentMethodType.Cash))
+                        }
+                    });
             }
         }
     }

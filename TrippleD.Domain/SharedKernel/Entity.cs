@@ -18,7 +18,7 @@ namespace TrippleD.Domain.SharedKernel
 
         public override bool Equals(object otherObject)
         {
-            var entity = otherObject as Entity<TId>;
+            Entity<TId> entity = otherObject as Entity<TId>;
             if (entity != null)
             {
                 return Equals(entity);

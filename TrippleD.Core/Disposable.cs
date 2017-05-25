@@ -10,7 +10,7 @@ namespace TrippleD.Core
             Func<TDisposable, TResult> fn)
             where TDisposable : IDisposable
         {
-            using (var disposable = factory())
+            using (TDisposable disposable = factory())
             {
                 return fn(disposable);
             }
@@ -22,7 +22,7 @@ namespace TrippleD.Core
             Action<TDisposable> fn)
             where TDisposable : IDisposable
         {
-            using (var disposable = factory())
+            using (TDisposable disposable = factory())
             {
                 fn(disposable);
             }

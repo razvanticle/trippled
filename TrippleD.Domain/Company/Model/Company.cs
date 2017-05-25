@@ -40,7 +40,7 @@ namespace TrippleD.Domain.Company.Model
         public void RateService(Service service)
         {
             // todo
-            var serviceToRate = Services.FirstOrDefault(x => x.Equals(service));
+            Service serviceToRate = Services.FirstOrDefault(x => x.Equals(service));
             if (serviceToRate == null)
             {
                 throw new Exception("Service not available for this company");
@@ -51,7 +51,7 @@ namespace TrippleD.Domain.Company.Model
 
         public void RemoveService(string serviceName)
         {
-            var service = Services.FirstOrDefault(x => x.Name == serviceName);
+            Service service = Services.FirstOrDefault(x => x.Name == serviceName);
 
             Services.Remove(service);
         }

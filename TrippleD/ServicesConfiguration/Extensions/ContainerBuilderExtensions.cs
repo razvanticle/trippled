@@ -16,7 +16,7 @@ namespace TrippleD.ServicesConfiguration.Extensions
         public static ContainerBuilder Execute<TStrategy>(this ContainerBuilder containerBuilder,
             Func<TStrategy> strategyFactory) where TStrategy : IStrategy<ContainerBuilder>
         {
-            var strategy = strategyFactory();
+            TStrategy strategy = strategyFactory();
             return containerBuilder.Execute(strategy);
         }
     }

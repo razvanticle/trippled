@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TrippleD.Persistence.InMemoryStore
 {
@@ -25,7 +26,7 @@ namespace TrippleD.Persistence.InMemoryStore
                 AddEntitiesCollection<T>(out entities);
             }
 
-            var castedEntities = (List<T>) entities;
+            List<T> castedEntities = (List<T>) entities;
             castedEntities.AddRange(newEntities);
         }
 
@@ -51,7 +52,7 @@ namespace TrippleD.Persistence.InMemoryStore
 
         public void Delete<T>(T entity)
         {
-            var entityType = typeof(T);
+            Type entityType = typeof(T);
 
             IList entities;
             if (!TryGetValue(entityType, out entities))
@@ -62,9 +63,9 @@ namespace TrippleD.Persistence.InMemoryStore
             entities.Remove(entity);
         }
 
-        public IEnumerable<T> GetEntities<T>()
+        public IQueryable<T> GetEntities<T>()
         {
-            return this[typeof(T)] as IList<T>;
+            return (IQueryable<T>) this[typeof(T)].AsQueryable();
         }
 
         private void AddEntitiesCollection<T>(out IList entities)

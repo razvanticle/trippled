@@ -15,7 +15,7 @@ namespace TrippleD.Core.Mappers
 
         public TOutput Map<TInput, TOutput>(TInput input)
         {
-            var mapper = serviceProvider.GetService<IMapper<TInput, TOutput>>();
+            IMapper<TInput, TOutput> mapper = serviceProvider.GetService<IMapper<TInput, TOutput>>();
 
             return mapper.Map(input);
         }

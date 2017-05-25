@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using Autofac.Builder;
 using TrippleD.Core;
 using TrippleD.Core.Extensions;
 
@@ -21,12 +22,12 @@ namespace TrippleD.ServicesConfiguration.RegistrationStrategies
         public void Execute(ContainerBuilder containerBuilder)
         {
             // todo refactor this
-            var types = this.assemblies.SelectMany(a => a.GetTypes());
+            IEnumerable<Type> types = this.assemblies.SelectMany(a => a.GetTypes());
 
-            foreach (var type in types)
+            foreach (Type type in types)
             {
-                var registrations = GetServicesFrom(type);
-                foreach (var reg in registrations)
+                IEnumerable<ServiceInfo> registrations = GetServicesFrom(type);
+                foreach (ServiceInfo reg in registrations)
                 {
                     RegisterService(reg, containerBuilder);
                 }
@@ -35,7 +36,7 @@ namespace TrippleD.ServicesConfiguration.RegistrationStrategies
 
         private void RegisterService(ServiceInfo registration, ContainerBuilder containerBuilder)
         {
-            var registrationBuilder = containerBuilder.RegisterType(registration.To);
+            IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> registrationBuilder = containerBuilder.RegisterType(registration.To);
 
             if (string.IsNullOrEmpty(registration.ContractName))
             {
@@ -46,13 +47,13 @@ namespace TrippleD.ServicesConfiguration.RegistrationStrategies
                 registrationBuilder.As(registration.From).WithMetadata("Name", registration.ContractName);
             }
 
-            var lifetimeBuilder = LifetimeFactory.CreateLifetimeRegistration(registration.InstanceLifetime);
+            Action<IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle>> lifetimeBuilder = LifetimeFactory.CreateLifetimeRegistration(registration.InstanceLifetime);
             lifetimeBuilder(registrationBuilder);
         }
 
         public IEnumerable<ServiceInfo> GetServicesFrom(Type type)
         {
-            var attributes = type.GetTypeInfo().GetAttributes<ServiceAttribute>(false);
+            IEnumerable<ServiceAttribute> attributes = type.GetTypeInfo().GetAttributes<ServiceAttribute>(false);
             return attributes.Select(a => new ServiceInfo(a.ExportType ?? type, type, a.ContractName, a.Lifetime));
         }
 

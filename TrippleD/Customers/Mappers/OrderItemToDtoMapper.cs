@@ -32,8 +32,8 @@ namespace TrippleD.Customers.Mappers
         public OrderItem Map(OrderItemDto orderItemDto)
         {
             Guard.ArgNotNull(orderItemDto, nameof(orderItemDto));
-            var service = orderItemDto.Service.Execute(mapper.Map<ServiceDto, Service>);
-            var executionAddress = orderItemDto.ExecutionAddress.Execute(mapper.Map<AddressDto, Address>);
+            Service service = orderItemDto.Service.Execute(mapper.Map<ServiceDto, Service>);
+            Address executionAddress = orderItemDto.ExecutionAddress.Execute(mapper.Map<AddressDto, Address>);
 
             return new OrderItem(service, executionAddress);
         }

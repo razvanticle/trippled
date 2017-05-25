@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using TrippleD.Core;
@@ -20,14 +21,14 @@ namespace TrippleD.Domain.SharedKernel.EventDispatcher
         {
             Guard.ArgNotNull(domainEvent, nameof(domainEvent));
 
-            var handlerType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
-            var wrapperType = typeof(DomainEventHandler<>).MakeGenericType(domainEvent.GetType());
-            var handlers = serviceProvider.GetServices(handlerType);
+            Type handlerType = typeof(IDomainEventHandler<>).MakeGenericType(domainEvent.GetType());
+            Type wrapperType = typeof(DomainEventHandler<>).MakeGenericType(domainEvent.GetType());
+            IEnumerable<object> handlers = serviceProvider.GetServices(handlerType);
 
-            var wrappedHandlers = handlers
+            IEnumerable<DomainEventHandler> wrappedHandlers = handlers
                 .Select(handler => (DomainEventHandler) Activator.CreateInstance(wrapperType, handler));
 
-            foreach (var handler in wrappedHandlers)
+            foreach (DomainEventHandler handler in wrappedHandlers)
             {
                 handler.Handle(domainEvent);
             }

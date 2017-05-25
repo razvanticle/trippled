@@ -54,7 +54,7 @@ namespace TrippleD.Domain.SharedKernel
                 return false;
             }
 
-            var other = candidate as TObject;
+            TObject other = candidate as TObject;
 
             return Equals(other);
         }
@@ -158,7 +158,7 @@ namespace TrippleD.Domain.SharedKernel
         {
             Type t = GetType();
 
-            var fields = new List<FieldInfo>();
+            List<FieldInfo> fields = new List<FieldInfo>();
 
             while (t != typeof(object))
             {

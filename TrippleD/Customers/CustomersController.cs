@@ -1,10 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TrippleD.Core.Extensions;
 using TrippleD.Core.Mappers;
 using TrippleD.Customers.Dtos;
 using TrippleD.Domain.Customers.Model;
-using TrippleD.Domain.SharedKernel;
 using TrippleD.Persistence.Repository;
 
 namespace TrippleD.Customers
@@ -21,23 +21,39 @@ namespace TrippleD.Customers
             this.mapper = mapper;
         }
 
-        [HttpPost("{customerId}/orders")]
-        public IActionResult PostOrder(int customerId, [FromBody]OrderDto orderDto)
+        [HttpGet("{id}")]
+        public IActionResult GetCustomer(int id)
         {
-            var customer = customerRepository.GetEntities( /*by id*/).FirstOrDefault();
-            var order = orderDto.Execute(mapper.Map<OrderDto, Order>);
-            customer.AddOrder(order);
+            ISpecification<Customer> specification = new CustomerIdSpecification(id).And(new CustomerEmailSpecification("jdoe@gmail.com"));
+            Customer customer = customerRepository.GetEntity(specification);
+            if (customer == null)
+            {
+                return NotFound($"Customer with id {id} was not found");
+            }
 
-            return Ok();
+            CustomerDto customerDto = customer.Execute(mapper.Map<Customer, CustomerDto>);
+            return Ok(customerDto);
         }
 
         [HttpGet]
         public IActionResult GetCustomers()
         {
-            var customers = customerRepository.GetEntities()
+            IEnumerable<CustomerDto> customers = customerRepository.GetEntities()
                 .Select(mapper.Map<Customer, CustomerDto>);
 
             return Ok(customers);
+        }
+
+        [HttpPost("{customerId}/orders")]
+        public IActionResult PostOrder(int customerId, [FromBody] OrderDto orderDto)
+        {
+            ISpecification<Customer> specification = new CustomerIdSpecification(customerId);
+
+            Customer customer = customerRepository.GetEntity(specification);
+            Order order = orderDto.Execute(mapper.Map<OrderDto, Order>);
+            customer.AddOrder(order);
+
+            return Ok();
         }
     }
 }

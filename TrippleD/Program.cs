@@ -8,11 +8,11 @@ namespace TrippleD
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
+            IConfigurationRoot config = new ConfigurationBuilder()
                 .AddCommandLine(args)
                 .Build();
 
-            var host = new WebHostBuilder()
+            IWebHost host = new WebHostBuilder()
                 .UseConfiguration(config)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
