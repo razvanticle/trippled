@@ -5,6 +5,8 @@ using TrippleD.Core.Extensions;
 using TrippleD.Core.Mappers;
 using TrippleD.Customers.Dtos;
 using TrippleD.Domain.Customers.Model;
+using TrippleD.Domain.Customers.Specifications;
+using TrippleD.Domain.SharedKernel.Specifications;
 using TrippleD.Persistence.Repository;
 
 namespace TrippleD.Customers
@@ -24,7 +26,7 @@ namespace TrippleD.Customers
         [HttpGet("{id}")]
         public IActionResult GetCustomer(int id)
         {
-            ISpecification<Customer> specification = new CustomerIdSpecification(id).And(new CustomerEmailSpecification("jdoe@gmail.com"));
+            ISpecification<Customer> specification = new CustomerIdSpecification(id);
             Customer customer = customerRepository.GetEntity(specification);
             if (customer == null)
             {

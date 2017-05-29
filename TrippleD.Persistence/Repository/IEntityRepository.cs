@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TrippleD.Domain.SharedKernel;
+using TrippleD.Domain.SharedKernel.Specifications;
 
 namespace TrippleD.Persistence.Repository
 {
