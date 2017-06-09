@@ -4,12 +4,13 @@ using TrippleD.Core;
 using TrippleD.Domain.SharedKernel;
 using TrippleD.Domain.SharedKernel.EventDispatcher;
 using TrippleD.Domain.SharedKernel.Events;
+using TrippleD.Domain.SharedKernel.Identities;
 using TrippleD.Domain.SharedKernel.Specifications;
 
 namespace TrippleD.Persistence.Repository
 {
-    public abstract class EntityRepository<TEntity, TKey> : IEntityRepository<TEntity, TKey>
-        where TEntity : AggregateRoot<TKey>
+    public abstract class EntityRepository<TAggregate> : IEntityRepository<TAggregate>
+        where TAggregate : AggregateRoot
     {
         protected readonly IDomainEventDispatcher Dispatcher;
         private readonly InMemoryStore.InMemoryStore store;
@@ -20,39 +21,46 @@ namespace TrippleD.Persistence.Repository
             Dispatcher = dispatcher;
         }
 
-        public void Add(TEntity entity)
+        public void Add(TAggregate entity)
         {
             store.Add(entity);
             DispatchEvents(entity);
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(TAggregate entity)
         {
             store.Delete(entity);
             DispatchEvents(entity);
         }
 
-        public IEnumerable<TEntity> GetEntities()
+        public IEnumerable<TAggregate> GetEntities()
         {
-            return store.GetEntities<TEntity>();
+            return store.GetEntities<TAggregate>();
         }
 
-        public IEnumerable<TEntity> GetEntities(ISpecification<TEntity> criteria)
+        public IEnumerable<TAggregate> GetEntities(ISpecification<TAggregate> criteria)
         {
-            return store.GetEntities<TEntity>().Where(criteria.IsSatisfiedBy);
+            return store.GetEntities<TAggregate>().Where(criteria.IsSatisfiedBy);
         }
 
-        public TEntity GetEntity(ISpecification<TEntity> specification)
+        public TAggregate GetEntity(ISpecification<TAggregate> specification)
         {
             return GetEntities(specification).FirstOrDefault();
         }
 
-        public void Update(TEntity entity)
+        public TAggregate GetEntityById(IIdentity id)
+        {
+            ISpecification<TAggregate> entityByIdSpecification = new EntityByIdSecification<TAggregate>(id);
+
+            return GetEntity(entityByIdSpecification);
+        }
+
+        public void Update(TAggregate entity)
         {
             DispatchEvents(entity);
         }
 
-        protected void DispatchEvents(TEntity entity)
+        protected void DispatchEvents(TAggregate entity)
         {
             Guard.ArgNotNull(entity, nameof(entity));
 

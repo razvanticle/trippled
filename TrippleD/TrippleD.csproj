@@ -22,6 +22,7 @@
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" version="1.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrippleD.Application\TrippleD.Application.csproj" />
     <ProjectReference Include="..\TrippleD.Core\TrippleD.Core.csproj" />
     <ProjectReference Include="..\TrippleD.Domain\TrippleD.Domain.csproj" />
     <ProjectReference Include="..\TrippleD.Persistence\TrippleD.Persistence.csproj" />

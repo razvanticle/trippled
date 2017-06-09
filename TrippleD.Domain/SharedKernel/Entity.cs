@@ -1,24 +1,25 @@
 ﻿using System;
+using TrippleD.Domain.SharedKernel.Identities;
 
 namespace TrippleD.Domain.SharedKernel
 {
-    public abstract class Entity<TId> : IEquatable<Entity<TId>>
+    public abstract class Entity : IEquatable<Entity>
     {
-        protected Entity(TId id)
+        protected Entity(IIdentity id)
         {
-            if (Equals(id, default(TId)))
+            if (Equals(id, default(IIdentity)))
             {
-                throw new ArgumentException("The ID cannot be the type's default value.", "id");
+                throw new ArgumentException("The ID cannot be the type's default value.", nameof(id));
             }
 
             Id = id;
         }
         
-        public TId Id { get; }
+        public IIdentity Id { get; }
 
         public override bool Equals(object otherObject)
         {
-            Entity<TId> entity = otherObject as Entity<TId>;
+            Entity entity = otherObject as Entity;
             if (entity != null)
             {
                 return Equals(entity);
@@ -26,7 +27,7 @@ namespace TrippleD.Domain.SharedKernel
             return base.Equals(otherObject);
         }
 
-        public bool Equals(Entity<TId> other)
+        public bool Equals(Entity other)
         {
             return other != null && Id.Equals(other.Id);
         }

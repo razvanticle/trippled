@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TrippleD.SharedKernel.Dtos;
 
 namespace TrippleD.Companies.Dtos
@@ -11,7 +12,7 @@ namespace TrippleD.Companies.Dtos
 
         public string Email { get; set; }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

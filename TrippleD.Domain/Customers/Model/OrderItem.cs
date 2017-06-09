@@ -1,4 +1,4 @@
-﻿using TrippleD.Domain.Company.Model;
+﻿using TrippleD.Domain.Companies.Model;
 using TrippleD.Domain.SharedKernel;
 using TrippleD.Domain.SharedKernel.Model;
 

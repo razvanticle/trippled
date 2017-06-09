@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using TrippleD.Domain.SharedKernel.Events;
+using TrippleD.Domain.SharedKernel.Identities;
 
 namespace TrippleD.Domain.SharedKernel
 {
-    public class AggregateRoot<TId> : Entity<TId>
+    public class AggregateRoot : Entity
     {
         private readonly IList<IDomainEvent> domainEvents;
         
-        public AggregateRoot(TId id) : base(id)
+        public AggregateRoot(IIdentity id) : base(id)
         {
             domainEvents = new List<IDomainEvent>();
         }
-
+        
         public IEnumerable<IDomainEvent> DomainEvents => domainEvents;
 
         public void AddEvent(IDomainEvent domainEvent)

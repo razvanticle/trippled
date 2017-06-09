@@ -25,7 +25,7 @@ namespace TrippleD.Customers.Mappers
 
             return new OrderDto
             {
-                Id = order.Id,
+                Id = order.Id.Value,
                 PaymentMethod = order.PaymentMethod.Execute(mapper.Map<PaymentMethod, PaymentMethodDto>),
                 InvoiceAddress = order.Invoice.Address.Execute(mapper.Map<Address, AddressDto>),
                 OrderItems = order.OrderItems.Select(mapper.Map<OrderItem, OrderItemDto>)

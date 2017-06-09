@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TrippleD.Domain.Company.Events;
+
+using TrippleD.Domain.Companies.Events;
 using TrippleD.Domain.SharedKernel;
+using TrippleD.Domain.SharedKernel.Identities;
 using TrippleD.Domain.SharedKernel.Model;
 
-namespace TrippleD.Domain.Company.Model
+namespace TrippleD.Domain.Companies.Model
 {
-    public class Company : AggregateRoot<int>
+    public class Company : AggregateRoot
     {
-        public Company(int id) : base(id)
+        public Company(IIdentity id) : base(id)
         {
         }
-
+        
         public Address Address { get; set; }
 
         public TimeInterval BusinessHours { get; set; }

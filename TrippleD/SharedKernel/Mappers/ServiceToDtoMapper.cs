@@ -1,6 +1,6 @@
 ﻿using TrippleD.Core;
 using TrippleD.Core.Mappers;
-using TrippleD.Domain.Company.Model;
+using TrippleD.Domain.Companies.Model;
 using TrippleD.SharedKernel.Dtos;
 
 namespace TrippleD.SharedKernel.Mappers

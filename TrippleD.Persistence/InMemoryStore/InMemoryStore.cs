@@ -65,7 +65,13 @@ namespace TrippleD.Persistence.InMemoryStore
 
         public IQueryable<T> GetEntities<T>()
         {
-            return (IQueryable<T>) this[typeof(T)].AsQueryable();
+            IList entities;
+            if (TryGetValue(typeof(T), out entities))
+            {
+                return (IQueryable<T>) entities.AsQueryable();
+            }
+
+            return Enumerable.Empty<T>().AsQueryable();
         }
 
         private void AddEntitiesCollection<T>(out IList entities)

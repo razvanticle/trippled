@@ -3,7 +3,7 @@ using TrippleD.Companies.Dtos;
 using TrippleD.Core;
 using TrippleD.Core.Extensions;
 using TrippleD.Core.Mappers;
-using TrippleD.Domain.Company.Model;
+using TrippleD.Domain.Companies.Model;
 using TrippleD.Domain.SharedKernel.Model;
 using TrippleD.SharedKernel.Dtos;
 
@@ -24,7 +24,7 @@ namespace TrippleD.Companies.Mappers
 
             return new CompanyDto
             {
-                Id = company.Id,
+                Id = company.Id.Value,
                 Name = company.Name,
                 Rating = company.Rating,
                 Email = company.Email,

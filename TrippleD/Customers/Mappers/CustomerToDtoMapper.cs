@@ -21,7 +21,7 @@ namespace TrippleD.Customers.Mappers
 
             return new CustomerDto
             {
-                Id = customer.Id,
+                Id = customer.Id.Value,
                 Name = customer.Name.ToString(),
                 Email = customer.Email,
                 MobilePhone = customer.MobilePhone,

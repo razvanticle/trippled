@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrippleD.Core\TrippleD.Core.csproj" />
+    <ProjectReference Include="..\TrippleD.Domain\TrippleD.Domain.csproj" />
+    <ProjectReference Include="..\TrippleD.Persistence\TrippleD.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

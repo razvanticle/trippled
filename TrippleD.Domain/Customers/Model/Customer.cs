@@ -2,15 +2,16 @@
 using TrippleD.Core;
 using TrippleD.Domain.Customers.Events;
 using TrippleD.Domain.SharedKernel;
+using TrippleD.Domain.SharedKernel.Identities;
 
 namespace TrippleD.Domain.Customers.Model
 {
-    public class Customer : AggregateRoot<int>
+    public class Customer : AggregateRoot
     {
-        public Customer(int id) : base(id)
+        public Customer(IIdentity id) : base(id)
         {
         }
-
+        
         public string Email { get; set; }
 
         public string MobilePhone { get; set; }

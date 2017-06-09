@@ -1,21 +1,24 @@
 ﻿using System.Collections.Generic;
 using TrippleD.Domain.SharedKernel;
+using TrippleD.Domain.SharedKernel.Identities;
 using TrippleD.Domain.SharedKernel.Specifications;
 
 namespace TrippleD.Persistence.Repository
 {
-    public interface IEntityRepository<TEntity, in TKey> where TEntity : AggregateRoot<TKey>
+    public interface IEntityRepository<TAggregate> where TAggregate : AggregateRoot
     {
-        void Add(TEntity entity);
+        void Add(TAggregate entity);
 
-        void Update(TEntity entity);
+        void Delete(TAggregate entity);
 
-        void Delete(TEntity entity);
+        IEnumerable<TAggregate> GetEntities();
 
-        TEntity GetEntity(ISpecification<TEntity> specification);
+        IEnumerable<TAggregate> GetEntities(ISpecification<TAggregate> specification);
 
-        IEnumerable<TEntity> GetEntities();
+        TAggregate GetEntity(ISpecification<TAggregate> specification);
 
-        IEnumerable<TEntity> GetEntities(ISpecification<TEntity> specification);
+        TAggregate GetEntityById(IIdentity id);
+
+        void Update(TAggregate entity);
     }
 }

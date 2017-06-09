@@ -1,11 +1,11 @@
 ﻿using TrippleD.Core;
-using TrippleD.Domain.Company.Model;
+using TrippleD.Domain.Companies.Model;
 using TrippleD.Domain.SharedKernel.EventDispatcher;
 
 namespace TrippleD.Persistence.Repository
 {
-    [Service(typeof(IEntityRepository<Company, int>))]
-    public class CompanyRepository: EntityRepository<Company,int>
+    [Service(typeof(IEntityRepository<Company>))]
+    public class CompanyRepository: EntityRepository<Company>
     {
         public CompanyRepository(InMemoryStore.InMemoryStore store, IDomainEventDispatcher dispatcher) : base(store, dispatcher)
         {
