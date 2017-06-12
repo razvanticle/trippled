@@ -1,6 +1,6 @@
-﻿using TrippleD.Domain.SharedKernel.Events;
+﻿using TrippleD.SharedKernel.Events;
 
-namespace TrippleD.Domain.SharedKernel.EventDispatcher
+namespace TrippleD.SharedKernel.EventDispatcher
 {
     public interface IDomainEventDispatcher
     {

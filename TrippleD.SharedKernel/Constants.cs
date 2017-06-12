@@ -1,6 +1,6 @@
 using System;
 
-namespace TrippleD.Persistence.InMemoryStore
+namespace TrippleD.SharedKernel
 {
     public static class Constants
     {

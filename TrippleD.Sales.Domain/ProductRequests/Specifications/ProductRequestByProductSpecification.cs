@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using TrippleD.Domain.SharedKernel.Identities;
-using TrippleD.Domain.SharedKernel.Specifications;
+using TrippleD.SharedKernel.Identities;
+using TrippleD.SharedKernel.Specifications;
 
-namespace TrippleD.Domain.ProductRequests.Specifications
+namespace TrippleD.Sales.Domain.ProductRequests.Specifications
 {
     public class ProductRequestByProductSpecification : Specification<ProductRequest>
     {

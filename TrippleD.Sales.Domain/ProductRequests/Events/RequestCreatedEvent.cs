@@ -1,6 +1,6 @@
-﻿using TrippleD.Domain.SharedKernel.Events;
+﻿using TrippleD.SharedKernel.Events;
 
-namespace TrippleD.Domain.ProductRequests.Events
+namespace TrippleD.Sales.Domain.ProductRequests.Events
 {
     public class RequestCreatedEvent : DomainEvent
     {

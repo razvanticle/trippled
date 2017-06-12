@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using TrippleD.Core;
-using TrippleD.Domain.SharedKernel.Events;
+using TrippleD.SharedKernel.Events;
 
-namespace TrippleD.Domain.SharedKernel.EventDispatcher
+namespace TrippleD.SharedKernel.EventDispatcher
 {
     [Service(typeof(IDomainEventDispatcher), Lifetime.Application)]
     public class DomainEventDispatcher : IDomainEventDispatcher

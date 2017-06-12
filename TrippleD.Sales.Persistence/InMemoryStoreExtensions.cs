@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
-using TrippleD.Domain.Companies.Model;
-using TrippleD.Domain.Customers.Model;
-using TrippleD.Domain.Products;
-using TrippleD.Domain.SharedKernel;
-using TrippleD.Domain.SharedKernel.Identities;
-using TrippleD.Domain.SharedKernel.Model;
+using TrippleD.Persistence.InMemoryStore;
+using TrippleD.Sales.Domain.Companies.Model;
+using TrippleD.Sales.Domain.Customers.Model;
+using TrippleD.Sales.Domain.Products;
+using TrippleD.SharedKernel;
+using TrippleD.SharedKernel.Identities;
+using TrippleD.SharedKernel.Model;
 
-namespace TrippleD.Persistence.InMemoryStore
+namespace TrippleD.Sales.Persistence
 {
     public static class InMemoryStoreExtensions
     {

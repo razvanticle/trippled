@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace TrippleD.Domain.SharedKernel
+namespace TrippleD.SharedKernel
 {
     /// <summary>
     /// Abstract Base Class for Value Objects

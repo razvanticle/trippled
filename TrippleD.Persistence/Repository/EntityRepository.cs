@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TrippleD.Core;
-using TrippleD.Domain.SharedKernel;
-using TrippleD.Domain.SharedKernel.EventDispatcher;
-using TrippleD.Domain.SharedKernel.Events;
-using TrippleD.Domain.SharedKernel.Identities;
-using TrippleD.Domain.SharedKernel.Specifications;
+using TrippleD.SharedKernel;
+using TrippleD.SharedKernel.EventDispatcher;
+using TrippleD.SharedKernel.Events;
+using TrippleD.SharedKernel.Identities;
+using TrippleD.SharedKernel.Specifications;
 
 namespace TrippleD.Persistence.Repository
 {

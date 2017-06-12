@@ -1,7 +1,7 @@
-﻿using TrippleD.Domain.SharedKernel.Identities;
-using TrippleD.Domain.SharedKernel.Specifications;
+﻿using TrippleD.SharedKernel.Identities;
+using TrippleD.SharedKernel.Specifications;
 
-namespace TrippleD.Domain.Products.Specifications
+namespace TrippleD.Sales.Domain.Products.Specifications
 {
     public class ProductByIdSpecification : EntityByIdSecification<Product>
     {

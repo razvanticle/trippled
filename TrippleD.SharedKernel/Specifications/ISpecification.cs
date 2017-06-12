@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace TrippleD.Domain.SharedKernel.Specifications
+namespace TrippleD.SharedKernel.Specifications
 {
     public interface ISpecification<T>
     {

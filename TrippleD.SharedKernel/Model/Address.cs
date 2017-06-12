@@ -1,4 +1,4 @@
-﻿namespace TrippleD.Domain.SharedKernel.Model
+﻿namespace TrippleD.SharedKernel.Model
 {
     public class Address : ValueObjectBase<Address>
     {

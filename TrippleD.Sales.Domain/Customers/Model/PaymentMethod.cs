@@ -1,6 +1,6 @@
-﻿using TrippleD.Domain.SharedKernel;
+﻿using TrippleD.SharedKernel;
 
-namespace TrippleD.Domain.Customers.Model
+namespace TrippleD.Sales.Domain.Customers.Model
 {
     public class PaymentMethod : ValueObjectBase<PaymentMethod>
     {

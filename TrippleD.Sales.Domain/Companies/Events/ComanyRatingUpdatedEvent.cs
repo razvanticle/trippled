@@ -1,11 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-
+﻿using System.Diagnostics;
 using TrippleD.Core;
-using TrippleD.Domain.SharedKernel.Events;
-using TrippleD.Domain.SharedKernel.Identities;
+using TrippleD.SharedKernel.Events;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Domain.Companies.Events
+namespace TrippleD.Sales.Domain.Companies.Events
 {
     public class ComanyRatingUpdatedEvent : DomainEvent
     {

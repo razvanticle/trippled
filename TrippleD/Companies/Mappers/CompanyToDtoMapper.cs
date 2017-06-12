@@ -3,9 +3,9 @@ using TrippleD.Companies.Dtos;
 using TrippleD.Core;
 using TrippleD.Core.Extensions;
 using TrippleD.Core.Mappers;
-using TrippleD.Domain.Companies.Model;
-using TrippleD.Domain.SharedKernel.Model;
+using TrippleD.Sales.Domain.Companies.Model;
 using TrippleD.SharedKernel.Dtos;
+using TrippleD.SharedKernel.Model;
 
 namespace TrippleD.Companies.Mappers
 {

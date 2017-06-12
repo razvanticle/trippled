@@ -1,14 +1,14 @@
 ﻿using TrippleD.Core;
-using TrippleD.Domain.Products;
-using TrippleD.Domain.SharedKernel.EventDispatcher;
 using TrippleD.Persistence.Repository;
+using TrippleD.Sales.Domain.Products;
+using TrippleD.SharedKernel.EventDispatcher;
 
-namespace TrippleD.Persistence.Products
+namespace TrippleD.Sales.Persistence.Products
 {
     [Service(typeof(IEntityRepository<Product>))]
     public class ProductRepository : EntityRepository<Product>
     {
-        public ProductRepository(InMemoryStore.InMemoryStore store, IDomainEventDispatcher dispatcher) : base(store,
+        public ProductRepository(TrippleD.Persistence.InMemoryStore.InMemoryStore store, IDomainEventDispatcher dispatcher) : base(store,
             dispatcher)
         {
         }

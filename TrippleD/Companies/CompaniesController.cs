@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using TrippleD.Companies.Dtos;
 using TrippleD.Core.Extensions;
 using TrippleD.Core.Mappers;
-using TrippleD.Domain.Companies.Model;
-using TrippleD.Domain.SharedKernel.Identities;
 using TrippleD.Persistence.Repository;
+using TrippleD.Sales.Domain.Companies.Model;
+using TrippleD.SharedKernel.Identities;
 
 namespace TrippleD.Companies
 {

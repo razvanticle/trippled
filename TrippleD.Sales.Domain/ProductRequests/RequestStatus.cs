@@ -1,4 +1,4 @@
-﻿namespace TrippleD.Domain.ProductRequests
+﻿namespace TrippleD.Sales.Domain.ProductRequests
 {
     public enum RequestStatus
     {

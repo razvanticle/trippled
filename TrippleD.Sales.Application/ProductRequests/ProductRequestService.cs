@@ -1,16 +1,16 @@
 ﻿using System;
-using TrippleD.Application.Extensions;
 using TrippleD.Core;
-using TrippleD.Domain.Customers.Model;
-using TrippleD.Domain.ProductRequests;
-using TrippleD.Domain.ProductRequests.Specifications;
-using TrippleD.Domain.Products;
-using TrippleD.Domain.SharedKernel.Identities;
-using TrippleD.Domain.SharedKernel.Specifications;
-using TrippleD.Persistence.InMemoryStore;
 using TrippleD.Persistence.Repository;
+using TrippleD.Sales.Application.Extensions;
+using TrippleD.Sales.Domain.Customers.Model;
+using TrippleD.Sales.Domain.ProductRequests;
+using TrippleD.Sales.Domain.ProductRequests.Specifications;
+using TrippleD.Sales.Domain.Products;
+using TrippleD.SharedKernel;
+using TrippleD.SharedKernel.Identities;
+using TrippleD.SharedKernel.Specifications;
 
-namespace TrippleD.Application.ProductRequests
+namespace TrippleD.Sales.Application.ProductRequests
 {
     public interface IProductRequestService
     {

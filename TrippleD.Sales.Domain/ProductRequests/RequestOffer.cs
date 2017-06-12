@@ -1,6 +1,6 @@
-﻿using TrippleD.Domain.SharedKernel;
+﻿using TrippleD.SharedKernel;
 
-namespace TrippleD.Domain.ProductRequests
+namespace TrippleD.Sales.Domain.ProductRequests
 {
     public class RequestOffer:ValueObjectBase<RequestOffer>
     {

@@ -1,9 +1,9 @@
 ﻿using System;
-using TrippleD.Domain.ProductRequests.Events;
-using TrippleD.Domain.SharedKernel;
-using TrippleD.Domain.SharedKernel.Identities;
+using TrippleD.Sales.Domain.ProductRequests.Events;
+using TrippleD.SharedKernel;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Domain.ProductRequests
+namespace TrippleD.Sales.Domain.ProductRequests
 {
     public class ProductRequest : AggregateRoot
     {

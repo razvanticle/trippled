@@ -1,4 +1,4 @@
-﻿namespace TrippleD.Domain.SharedKernel.Model
+﻿namespace TrippleD.SharedKernel.Model
 {
     public class Time : ValueObjectBase<Time>
     {

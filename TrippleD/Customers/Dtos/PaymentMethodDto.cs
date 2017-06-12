@@ -1,4 +1,4 @@
-﻿using TrippleD.Domain.Customers.Model;
+﻿using TrippleD.Sales.Domain.Customers.Model;
 
 namespace TrippleD.Customers.Dtos
 {

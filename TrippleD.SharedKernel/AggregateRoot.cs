@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using TrippleD.Domain.SharedKernel.Events;
-using TrippleD.Domain.SharedKernel.Identities;
+using TrippleD.SharedKernel.Events;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Domain.SharedKernel
+namespace TrippleD.SharedKernel
 {
     public class AggregateRoot : Entity
     {

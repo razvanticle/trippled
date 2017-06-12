@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using TrippleD.Persistence.InMemoryStore;
 using TrippleD.ServicesConfiguration.Extensions;
 using TrippleD.ServicesConfiguration.RegistrationStrategies;
+using TrippleD.Sales.Persistence;
 
 namespace TrippleD
 {

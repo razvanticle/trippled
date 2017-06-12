@@ -1,7 +1,7 @@
 ﻿using System;
-using TrippleD.Domain.SharedKernel.Identities;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Domain.SharedKernel
+namespace TrippleD.SharedKernel
 {
     public abstract class Entity : IEquatable<Entity>
     {

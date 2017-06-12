@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TrippleD.Domain.SharedKernel.Identities
+namespace TrippleD.SharedKernel.Identities
 {
     public class Identity : IEquatable<Identity>, IIdentity
     {

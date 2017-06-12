@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace TrippleD.Domain.SharedKernel.Specifications
+namespace TrippleD.SharedKernel.Specifications
 {
     public class NotSpecification<T> : Specification<T>
     {

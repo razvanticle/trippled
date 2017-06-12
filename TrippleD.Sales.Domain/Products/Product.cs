@@ -1,7 +1,7 @@
-using TrippleD.Domain.SharedKernel;
-using TrippleD.Domain.SharedKernel.Identities;
+using TrippleD.SharedKernel;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Domain.Products
+namespace TrippleD.Sales.Domain.Products
 {
     public class Product : AggregateRoot
     {

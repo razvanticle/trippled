@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
-using TrippleD.Domain.SharedKernel.Identities;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Domain.SharedKernel.Specifications
+namespace TrippleD.SharedKernel.Specifications
 {
     public class EntityByIdSecification<T> : Specification<T> where T : Entity
     {

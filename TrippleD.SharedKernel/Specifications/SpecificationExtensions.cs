@@ -1,4 +1,4 @@
-﻿namespace TrippleD.Domain.SharedKernel.Specifications
+﻿namespace TrippleD.SharedKernel.Specifications
 {
     public static class SpecificationExtensions
     {

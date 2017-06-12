@@ -1,7 +1,7 @@
 ﻿using TrippleD.Core;
 using TrippleD.Core.Mappers;
-using TrippleD.Domain.SharedKernel.Model;
 using TrippleD.SharedKernel.Dtos;
+using TrippleD.SharedKernel.Model;
 
 namespace TrippleD.SharedKernel.Mappers
 {

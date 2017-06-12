@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using TrippleD.Domain.Customers.Model;
-using TrippleD.Domain.SharedKernel.Specifications;
+using TrippleD.Sales.Domain.Customers.Model;
+using TrippleD.SharedKernel.Specifications;
 
-namespace TrippleD.Domain.Customers.Specifications
+namespace TrippleD.Sales.Domain.Customers.Specifications
 {
     public class CustomerEmailSpecification : Specification<Customer>
     {

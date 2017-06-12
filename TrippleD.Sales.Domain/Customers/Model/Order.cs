@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using TrippleD.Domain.SharedKernel;
-using TrippleD.Domain.SharedKernel.Identities;
+﻿using System.Collections.Generic;
+using TrippleD.SharedKernel;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Domain.Customers.Model
+namespace TrippleD.Sales.Domain.Customers.Model
 {
     public class Order : Entity
     {

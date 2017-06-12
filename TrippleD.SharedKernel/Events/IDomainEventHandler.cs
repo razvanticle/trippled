@@ -1,4 +1,4 @@
-namespace TrippleD.Domain.SharedKernel.Events
+namespace TrippleD.SharedKernel.Events
 {
     public interface IDomainEventHandler<in T> where T : IDomainEvent
     {

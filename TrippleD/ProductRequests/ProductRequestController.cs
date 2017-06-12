@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using TrippleD.Application.ProductRequests;
 using TrippleD.Persistence.InMemoryStore;
 using TrippleD.ProductRequests.Dtos;
+using TrippleD.Sales.Application.ProductRequests;
+using TrippleD.SharedKernel;
 
 namespace TrippleD.ProductRequests
 {

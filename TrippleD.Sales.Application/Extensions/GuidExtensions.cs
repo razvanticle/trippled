@@ -1,7 +1,7 @@
 ﻿using System;
-using TrippleD.Domain.SharedKernel.Identities;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Application.Extensions
+namespace TrippleD.Sales.Application.Extensions
 {
     internal static class GuidExtensions
     {

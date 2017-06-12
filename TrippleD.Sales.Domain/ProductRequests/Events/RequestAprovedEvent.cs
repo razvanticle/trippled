@@ -1,7 +1,7 @@
-﻿using TrippleD.Domain.SharedKernel.Events;
-using TrippleD.Domain.SharedKernel.Identities;
+﻿using TrippleD.SharedKernel.Events;
+using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Domain.ProductRequests.Events
+namespace TrippleD.Sales.Domain.ProductRequests.Events
 {
     public class RequestAprovedEvent : DomainEvent
     {

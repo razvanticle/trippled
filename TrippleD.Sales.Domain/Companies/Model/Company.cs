@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TrippleD.Sales.Domain.Companies.Events;
+using TrippleD.SharedKernel;
+using TrippleD.SharedKernel.Identities;
+using TrippleD.SharedKernel.Model;
 
-using TrippleD.Domain.Companies.Events;
-using TrippleD.Domain.SharedKernel;
-using TrippleD.Domain.SharedKernel.Identities;
-using TrippleD.Domain.SharedKernel.Model;
-
-namespace TrippleD.Domain.Companies.Model
+namespace TrippleD.Sales.Domain.Companies.Model
 {
     public class Company : AggregateRoot
     {
