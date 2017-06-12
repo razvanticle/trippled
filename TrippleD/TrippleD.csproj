@@ -22,10 +22,16 @@
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" version="1.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrippleD.Application\TrippleD.Application.csproj" />
     <ProjectReference Include="..\TrippleD.Core\TrippleD.Core.csproj" />
-    <ProjectReference Include="..\TrippleD.Domain\TrippleD.Domain.csproj" />
+    <ProjectReference Include="..\TrippleD.Management.Application\TrippleD.Management.Application.csproj" />
+    <ProjectReference Include="..\TrippleD.Management.Domain\TrippleD.Management.Domain.csproj" />
+    <ProjectReference Include="..\TrippleD.Management.Events\TrippleD.Management.Events.csproj" />
     <ProjectReference Include="..\TrippleD.Persistence\TrippleD.Persistence.csproj" />
+    <ProjectReference Include="..\TrippleD.Sales.Application\TrippleD.Sales.Application.csproj" />
+    <ProjectReference Include="..\TrippleD.Sales.Domain\TrippleD.Sales.Domain.csproj" />
+    <ProjectReference Include="..\TrippleD.Sales.Events\TrippleD.Sales.Events.csproj" />
+    <ProjectReference Include="..\TrippleD.Sales.Persistence\TrippleD.Sales.Persistence.csproj" />
+    <ProjectReference Include="..\TrippleD.SharedKernel\TrippleD.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

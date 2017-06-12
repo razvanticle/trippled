@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TrippleD.Core\TrippleD.Core.csproj" />
+    <ProjectReference Include="..\TrippleD.Management.Events\TrippleD.Management.Events.csproj" />
     <ProjectReference Include="..\TrippleD.SharedKernel\TrippleD.SharedKernel.csproj" />
   </ItemGroup>
 

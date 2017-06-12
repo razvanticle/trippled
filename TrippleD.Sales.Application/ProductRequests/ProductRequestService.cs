@@ -1,4 +1,5 @@
 ﻿using System;
+using TrippleD.Application.Extensions;
 using TrippleD.Core;
 using TrippleD.Domain.Customers.Model;
 using TrippleD.Domain.ProductRequests;
@@ -37,7 +38,7 @@ namespace TrippleD.Application.ProductRequests
         {
             Guard.ArgNotEmpty(requestId, nameof(requestId));
 
-            IIdentity requestIdentity = Identity.Create(requestId);
+            IIdentity requestIdentity = requestId.ToIdentity();
             ProductRequest productRequest = requestRepository.GetEntityById(requestIdentity);
             if (productRequest == null)
             {
@@ -54,7 +55,7 @@ namespace TrippleD.Application.ProductRequests
             Guard.ArgNotEmpty(requestId, nameof(requestId));
             Guard.ArgNotEmpty(price, nameof(price));
 
-            IIdentity requestIdentity = Identity.Create(requestId);
+            IIdentity requestIdentity = requestId.ToIdentity();
 
             ProductRequest productRequest = requestRepository.GetEntityById(requestIdentity);
             if (productRequest == null)
@@ -73,8 +74,8 @@ namespace TrippleD.Application.ProductRequests
             Guard.ArgNotEmpty(productId, nameof(productId));
             Guard.ArgNotEmpty(customerId, nameof(customerId));
 
-            IIdentity productIdentity = Identity.Create(productId);
-            IIdentity customerIdentity = Identity.Create(customerId);
+            IIdentity productIdentity = productId.ToIdentity();
+            IIdentity customerIdentity = customerId.ToIdentity();
 
             Product product = productRepository.GetEntityById(productIdentity);
             if (product == null)
