@@ -1,15 +1,15 @@
-﻿using TrippleD.Core;
+﻿using System;
+using TrippleD.Core;
 using TrippleD.Core.Mappers;
 using TrippleD.SharedKernel.Dtos;
-using TrippleD.SharedKernel.Model;
 
 namespace TrippleD.SharedKernel.Mappers
 {
-    public class TimeToDtoMapper : IMapper<Time, TimeDto>
+    public class TimeToDtoMapper : IMapper<DateTime, TimeDto>
     {
-        public TimeDto Map(Time time)
+        public TimeDto Map(DateTime time)
         {
-            Guard.ArgNotNull(time, nameof(time));
+            Guard.ArgNotEmpty(time, nameof(time));
 
             return new TimeDto
             {

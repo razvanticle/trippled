@@ -16,9 +16,4 @@ namespace TrippleD.Sales.Domain.ProductRequests.Specifications
 
         public override Expression<Func<ProductRequest, bool>> SpecExpression => x => x.ProductId.Equals(productId);
     }
-
-    public class PendingRequestSpecification:Specification<ProductRequest>
-    {
-        public override Expression<Func<ProductRequest, bool>> SpecExpression => x => x.Status == RequestStatus.Pending;
-    }
 }

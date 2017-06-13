@@ -1,7 +1,8 @@
 ﻿using System;
-using TrippleD.Events.ProductsRequests;
+using TrippleD.Sales.Domain.ProductRequests.Events;
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Identities;
+using TrippleD.SharedKernel.Model;
 
 namespace TrippleD.Sales.Domain.ProductRequests
 {
@@ -9,16 +10,19 @@ namespace TrippleD.Sales.Domain.ProductRequests
     {
         private RequestOffer requestOffer;
 
-        public ProductRequest(IIdentity requestId, IIdentity productId, IIdentity customerId) : base(requestId)
+        public ProductRequest(IIdentity requestId, IIdentity productId, IIdentity customerId, TimeInterval timeInterval) : base(requestId)
         {
             ProductId = productId;
             CustomerId = customerId;
+            TimeInterval = timeInterval;
             Status = RequestStatus.Pending;
 
-            AddEvent(new RequestCreatedEvent(Id));
+            AddEvent(new RequestCreatedEvent(this));
         }
 
         public IIdentity CustomerId { get; }
+
+        public TimeInterval TimeInterval { get; }
 
         public IIdentity ProductId { get; }
 

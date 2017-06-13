@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TrippleD.Persistence.InMemoryStore;
 using TrippleD.Sales.Domain.Companies.Model;
 using TrippleD.Sales.Domain.Customers.Model;
@@ -20,7 +21,7 @@ namespace TrippleD.Sales.Persistence
                         Name = "Company 1",
                         Address = new Address("Cluj", "5", "Garibaldi"),
                         Rating = 5,
-                        BusinessHours = new TimeInterval(new Time(8, 0), new Time(17, 0)),
+                        BusinessHours = new TimeInterval(DateTime.Now, DateTime.Now.AddHours(1)),
                         Email = "company@comany.com",
                         PhoneNumber = "123",
                         WebSite = "www.company",

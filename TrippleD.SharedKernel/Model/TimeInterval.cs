@@ -1,15 +1,27 @@
-﻿namespace TrippleD.SharedKernel.Model
+﻿using System;
+
+namespace TrippleD.SharedKernel.Model
 {
     public class TimeInterval : ValueObjectBase<TimeInterval>
     {
-        public TimeInterval(Time startTime, Time endTime)
+        public TimeInterval(DateTime start, DateTime end)
         {
-            StartTime = startTime;
-            EndTime = endTime;
+            if (start > end)
+            {
+                throw new Exception("Start date cannot be greather than end date");
+            }
+
+            Start = start;
+            End = end;
         }
 
-        public Time EndTime { get; }
+        public DateTime End { get; }
+        public DateTime Start { get; }
 
-        public Time StartTime { get; }
+        public bool Overlaps(TimeInterval dateTimeRange)
+        {
+            return Start < dateTimeRange.End &&
+                   End > dateTimeRange.Start;
+        }
     }
 }

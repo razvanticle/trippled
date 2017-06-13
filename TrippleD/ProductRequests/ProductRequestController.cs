@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using TrippleD.Persistence.InMemoryStore;
 using TrippleD.ProductRequests.Dtos;
 using TrippleD.Sales.Application.ProductRequests;
 using TrippleD.SharedKernel;
@@ -21,15 +20,8 @@ namespace TrippleD.ProductRequests
         public IActionResult PostProductRequest([FromBody] ProductRequestDto productRequestDto)
         {
             Guid customerId = Constants.CustomerIds.Customer1;
-            productRequestService.RequestProduct(productRequestDto.ProductId, customerId);
-
-            return Ok();
-        }
-
-        [HttpPost("{requestId}/requestOffer")]
-        public IActionResult PostRequestOffer(Guid requestId, [FromBody] RequestOfferDto requestOfferDto)
-        {
-            productRequestService.MakeRequestOffer(requestId, requestOfferDto.Price);
+            productRequestService.RequestProduct(productRequestDto.ProductId, customerId, productRequestDto.StartDate,
+                productRequestDto.EndDate);
 
             return Ok();
         }
@@ -38,6 +30,14 @@ namespace TrippleD.ProductRequests
         public IActionResult PostRequestApprove(Guid requestId)
         {
             productRequestService.ApproveRequest(requestId);
+
+            return Ok();
+        }
+
+        [HttpPost("{requestId}/requestOffer")]
+        public IActionResult PostRequestOffer(Guid requestId, [FromBody] RequestOfferDto requestOfferDto)
+        {
+            productRequestService.MakeRequestOffer(requestId, requestOfferDto.Price);
 
             return Ok();
         }

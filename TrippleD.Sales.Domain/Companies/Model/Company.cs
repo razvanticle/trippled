@@ -13,7 +13,7 @@ namespace TrippleD.Sales.Domain.Companies.Model
         public Company(IIdentity id) : base(id)
         {
         }
-        
+
         public Address Address { get; set; }
 
         public TimeInterval BusinessHours { get; set; }

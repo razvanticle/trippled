@@ -1,4 +1,5 @@
-﻿using TrippleD.Core;
+﻿using System;
+using TrippleD.Core;
 using TrippleD.Core.Extensions;
 using TrippleD.Core.Mappers;
 using TrippleD.SharedKernel.Dtos;
@@ -21,8 +22,8 @@ namespace TrippleD.SharedKernel.Mappers
 
             return new TimeIntervalDto
             {
-                EndTime = timeInterval.EndTime.Execute<Time, TimeDto>(mapper.Map<Time, TimeDto>),
-                StartTime = timeInterval.StartTime.Execute<Time, TimeDto>(mapper.Map<Time, TimeDto>)
+                EndTime = timeInterval.End.Execute(mapper.Map<DateTime, TimeDto>),
+                StartTime = timeInterval.Start.Execute(mapper.Map<DateTime, TimeDto>)
             };
         }
     }

@@ -10,8 +10,4 @@
     <ProjectReference Include="..\TrippleD.SharedKernel\TrippleD.SharedKernel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ProductRequests\Events\" />
-  </ItemGroup>
-
 </Project>
