@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrippleD.Core\TrippleD.Core.csproj" />
-    <ProjectReference Include="..\TrippleD.Events\TrippleD.Events.csproj" />
-    <ProjectReference Include="..\TrippleD.SharedKernel\TrippleD.SharedKernel.csproj" />
+    <ProjectReference Include="..\TrippleD.Management.Domain\TrippleD.Management.Domain.csproj" />
+    <ProjectReference Include="..\TrippleD.Persistence\TrippleD.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

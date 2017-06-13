@@ -1,5 +1,5 @@
 ﻿using System;
-using TrippleD.Sales.Domain.ProductRequests.Events;
+using TrippleD.Events.ProductsRequests;
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Identities;
 
@@ -15,7 +15,7 @@ namespace TrippleD.Sales.Domain.ProductRequests
             CustomerId = customerId;
             Status = RequestStatus.Pending;
 
-            AddEvent(new RequestCreatedEvent(this));
+            AddEvent(new RequestCreatedEvent(Id));
         }
 
         public IIdentity CustomerId { get; }
@@ -51,7 +51,7 @@ namespace TrippleD.Sales.Domain.ProductRequests
         public void MakeRequestOffer(RequestOffer offer)
         {
             requestOffer = offer;
-            AddEvent(new RequestOfferMadeEvent(offer));
+            AddEvent(new RequestOfferMadeEvent(offer.Price));
         }
 
         public void Reject()

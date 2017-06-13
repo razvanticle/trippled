@@ -6,8 +6,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrippleD.Core\TrippleD.Core.csproj" />
-    <ProjectReference Include="..\TrippleD.Sales.Events\TrippleD.Sales.Events.csproj" />
+    <ProjectReference Include="..\TrippleD.Events\TrippleD.Events.csproj" />
     <ProjectReference Include="..\TrippleD.SharedKernel\TrippleD.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ProductRequests\Events\" />
   </ItemGroup>
 
 </Project>

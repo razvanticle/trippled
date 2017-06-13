@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrippleD.Core\TrippleD.Core.csproj" />
-    <ProjectReference Include="..\TrippleD.Events\TrippleD.Events.csproj" />
     <ProjectReference Include="..\TrippleD.SharedKernel\TrippleD.SharedKernel.csproj" />
   </ItemGroup>
 
