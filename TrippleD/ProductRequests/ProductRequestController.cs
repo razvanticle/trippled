@@ -20,16 +20,16 @@ namespace TrippleD.ProductRequests
         public IActionResult PostProductRequest([FromBody] ProductRequestDto productRequestDto)
         {
             Guid customerId = Constants.CustomerIds.Customer1;
-            productRequestService.RequestProduct(productRequestDto.ProductId, customerId, productRequestDto.StartDate,
-                productRequestDto.EndDate);
+            //productRequestService.RequestProduct(productRequestDto.ProductId, customerId, productRequestDto.StartDate,
+            //    productRequestDto.EndDate);
 
             return Ok();
         }
 
-        [HttpPost("{requestId}/approve")]
+        [HttpPost("{requestId}/cancel")]
         public IActionResult PostRequestApprove(Guid requestId)
         {
-            productRequestService.ApproveRequest(requestId);
+            productRequestService.CancelRequest(requestId);
 
             return Ok();
         }

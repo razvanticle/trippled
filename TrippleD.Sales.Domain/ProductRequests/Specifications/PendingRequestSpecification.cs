@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using TrippleD.SharedKernel.Model.ProductRequest;
 using TrippleD.SharedKernel.Specifications;
 
 namespace TrippleD.Sales.Domain.ProductRequests.Specifications

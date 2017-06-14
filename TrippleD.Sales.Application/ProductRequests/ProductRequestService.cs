@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using TrippleD.Core;
 using TrippleD.Persistence.Repository;
-using TrippleD.Sales.Application.Extensions;
-using TrippleD.Sales.Domain.Companies.Model;
-using TrippleD.Sales.Domain.Customers.Model;
 using TrippleD.Sales.Domain.ProductRequests;
 using TrippleD.Sales.Domain.ProductRequests.Specifications;
-using TrippleD.Sales.Domain.Products;
 using TrippleD.SharedKernel;
+using TrippleD.SharedKernel.Extensions;
 using TrippleD.SharedKernel.Identities;
 using TrippleD.SharedKernel.Model;
 using TrippleD.SharedKernel.Specifications;
@@ -18,8 +15,7 @@ namespace TrippleD.Sales.Application.ProductRequests
 {
     public interface IProductRequestService
     {
-        void ApproveRequest(Guid requestId);
-        void MakeRequestOffer(Guid requestId, int price);
+        void CancelRequest(Guid requestId);
         void RequestProduct(Guid productId, Guid customerId, Guid companyId, DateTime startDate, DateTime endDate);
     }
 
@@ -33,7 +29,7 @@ namespace TrippleD.Sales.Application.ProductRequests
             this.requestRepository = requestRepository;
         }
 
-        public void ApproveRequest(Guid requestId)
+        public void CancelRequest(Guid requestId)
         {
             Guard.ArgNotEmpty(requestId, nameof(requestId));
 
@@ -44,26 +40,7 @@ namespace TrippleD.Sales.Application.ProductRequests
                 throw new Exception("Product request not found");
             }
 
-            productRequest.Approve();
-
-            requestRepository.Update(productRequest);
-        }
-
-        public void MakeRequestOffer(Guid requestId, int price)
-        {
-            Guard.ArgNotEmpty(requestId, nameof(requestId));
-            Guard.ArgNotEmpty(price, nameof(price));
-
-            IIdentity requestIdentity = requestId.ToIdentity();
-
-            ProductRequest productRequest = requestRepository.GetEntityById(requestIdentity);
-            if (productRequest == null)
-            {
-                throw new Exception("Product request not found");
-            }
-
-            RequestOffer requestOffer = new RequestOffer(price);
-            productRequest.MakeRequestOffer(requestOffer);
+            productRequest.Cancel();
 
             requestRepository.Update(productRequest);
         }
