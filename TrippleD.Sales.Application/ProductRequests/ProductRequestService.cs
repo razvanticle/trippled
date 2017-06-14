@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TrippleD.Core;
 using TrippleD.Persistence.Repository;
 using TrippleD.Sales.Application.Extensions;
+using TrippleD.Sales.Domain.Companies.Model;
 using TrippleD.Sales.Domain.Customers.Model;
 using TrippleD.Sales.Domain.ProductRequests;
 using TrippleD.Sales.Domain.ProductRequests.Specifications;
@@ -15,24 +18,19 @@ namespace TrippleD.Sales.Application.ProductRequests
 {
     public interface IProductRequestService
     {
-        void MakeRequestOffer(Guid requestId, int price);
-        void RequestProduct(Guid productId, Guid customerId, DateTime startDate, DateTime endDate);
         void ApproveRequest(Guid requestId);
+        void MakeRequestOffer(Guid requestId, int price);
+        void RequestProduct(Guid productId, Guid customerId, Guid companyId, DateTime startDate, DateTime endDate);
     }
 
     [Service(typeof(IProductRequestService))]
     public class ProductRequestService : IProductRequestService
     {
-        private readonly IEntityRepository<Customer> customerRepository;
-        private readonly IEntityRepository<Product> productRepository;
         private readonly IEntityRepository<ProductRequest> requestRepository;
 
-        public ProductRequestService(IEntityRepository<ProductRequest> requestRepository,
-            IEntityRepository<Product> productRepository, IEntityRepository<Customer> customerRepository)
+        public ProductRequestService(IEntityRepository<ProductRequest> requestRepository)
         {
             this.requestRepository = requestRepository;
-            this.productRepository = productRepository;
-            this.customerRepository = customerRepository;
         }
 
         public void ApproveRequest(Guid requestId)
@@ -70,37 +68,43 @@ namespace TrippleD.Sales.Application.ProductRequests
             requestRepository.Update(productRequest);
         }
 
-        public void RequestProduct(Guid productId, Guid customerId, DateTime startDate, DateTime endDate)
+        public void RequestProduct(Guid productId, Guid customerId, Guid companyId, DateTime startDate,
+            DateTime endDate)
         {
             Guard.ArgNotEmpty(productId, nameof(productId));
             Guard.ArgNotEmpty(customerId, nameof(customerId));
 
             IIdentity productIdentity = productId.ToIdentity();
             IIdentity customerIdentity = customerId.ToIdentity();
-
-            Product product = productRepository.GetEntityById(productIdentity);
-            if (product == null)
-            {
-                throw new Exception("Product not found");
-            }
-
-            Customer customer = customerRepository.GetEntityById(customerIdentity);
-            if (customer == null)
-            {
-                throw new Exception("Customer not found");
-            }
+            IIdentity companyIdentity = companyId.ToIdentity();
 
             ISpecification<ProductRequest> requestByProductAndCustomer =
-                new ProductRequestByProductSpecification(productIdentity).And(
-                    new ProductRequestByCustomerSpecification(customerIdentity)).And(new PendingRequestSpecification());
+                new ProductRequestByProductSpecification(productIdentity)
+                    .And(new ProductRequestByCustomerSpecification(customerIdentity))
+                    .And(new ProductRequestByCompanySpecification(companyIdentity))
+                    .And(new PendingRequestSpecification());
+
             ProductRequest existingProductRequest = requestRepository.GetEntity(requestByProductAndCustomer);
             if (existingProductRequest != null)
             {
                 throw new Exception("Request already exists");
             }
-            
+
+            TimeInterval timeInterval = new TimeInterval(startDate, endDate);
+            ISpecification<ProductRequest> overlapingRequestSpecification =
+                new ProductRequestOverlapsTimeIntervalSpecification(timeInterval)
+                    .And(new ProductRequestByCompanySpecification(companyIdentity))
+                    .And(new ProductRequestByProductSpecification(productIdentity));
+            IEnumerable<ProductRequest> overlapingRequests =
+                requestRepository.GetEntities(overlapingRequestSpecification)
+                    .ToList();
+            if (overlapingRequests.Any())
+            {
+                throw new Exception($"Request overlaps with other {overlapingRequests.Count()} requests");
+            }
+
             ProductRequest productRequest = new ProductRequest(Identity.Create(Constants.ProductRequestsIds.Request1),
-                productIdentity, customerIdentity, new TimeInterval(startDate, endDate));
+                productIdentity, customerIdentity, companyIdentity, timeInterval);
 
             requestRepository.Add(productRequest);
         }

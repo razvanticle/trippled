@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrippleD.Sales.Domain.ProductRequests.Events;
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Identities;
@@ -10,10 +11,11 @@ namespace TrippleD.Sales.Domain.ProductRequests
     {
         private RequestOffer requestOffer;
 
-        public ProductRequest(IIdentity requestId, IIdentity productId, IIdentity customerId, TimeInterval timeInterval) : base(requestId)
+        public ProductRequest(IIdentity requestId, IIdentity productId, IIdentity customerId, IIdentity companyId, TimeInterval timeInterval) : base(requestId)
         {
             ProductId = productId;
             CustomerId = customerId;
+            CompanyId = companyId;
             TimeInterval = timeInterval;
             Status = RequestStatus.Pending;
 
@@ -21,6 +23,8 @@ namespace TrippleD.Sales.Domain.ProductRequests
         }
 
         public IIdentity CustomerId { get; }
+
+        public IIdentity CompanyId { get; }
 
         public TimeInterval TimeInterval { get; }
 
@@ -68,5 +72,20 @@ namespace TrippleD.Sales.Domain.ProductRequests
             Status = RequestStatus.Rejected;
             AddEvent(new RequestRejectedEvent(Id));
         }
+    }
+
+    public class CompanySchedule:AggregateRoot
+    {
+        public IIdentity CompanyId { get; }
+
+        public IList<ProductRequest> ProductRequests { get; }
+
+        public CompanySchedule(IIdentity companyId, IList<ProductRequest> productRequests) : base(Identity.Create())
+        {
+            CompanyId = companyId;
+            ProductRequests = productRequests;
+        }
+
+
     }
 }
