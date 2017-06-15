@@ -1,6 +1,6 @@
 ﻿using TrippleD.SharedKernel.Events;
 
-namespace TrippleD.Management.Domain.ProductRequests.Events
+namespace TrippleD.Sales.Domain.ProductRequests.Events
 {
     public class RequestOfferMadeEvent : DomainEvent
     {

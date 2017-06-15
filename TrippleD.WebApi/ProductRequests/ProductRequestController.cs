@@ -31,12 +31,20 @@ namespace TrippleD.Sales.WebApi.ProductRequests
             return Ok();
         }
 
-        //[HttpPost("{requestId}/requestOffer")]
-        //public IActionResult PostRequestOffer(Guid requestId, [FromBody] RequestOfferDto requestOfferDto)
-        //{
-        //    productRequestService.MakeRequestOffer(requestId, requestOfferDto.Price);
+        [HttpPost("{requestId}/approve")]
+        public IActionResult PostApproveRequest(Guid requestId)
+        {
+            productRequestService.ApproveRequest(requestId);
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
+
+        [HttpPost("{requestId}/requestOffer")]
+        public IActionResult PostRequestOffer(Guid requestId, [FromBody] RequestOfferDto requestOfferDto)
+        {
+            productRequestService.MakeRequestOffer(requestId, requestOfferDto);
+
+            return Ok();
+        }
     }
 }

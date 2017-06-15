@@ -10,6 +10,7 @@ using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Extensions;
 using TrippleD.SharedKernel.Identities;
 using TrippleD.SharedKernel.Model;
+using TrippleD.SharedKernel.Model.ProductRequest;
 using TrippleD.SharedKernel.Specifications;
 
 namespace TrippleD.Sales.Application.ProductRequests
@@ -18,6 +19,8 @@ namespace TrippleD.Sales.Application.ProductRequests
     {
         void CancelRequest(Guid requestId);
         void RequestProduct(ProductRequestDto productRequestDto);
+        void ApproveRequest(Guid requestId);
+        void MakeRequestOffer(Guid requestId, RequestOfferDto requestOfferDto);
     }
 
     [Service(typeof(IProductRequestService))]
@@ -83,6 +86,41 @@ namespace TrippleD.Sales.Application.ProductRequests
                 productIdentity, customerIdentity, companyIdentity, timeInterval);
 
             requestRepository.Add(productRequest);
+        }
+
+        public void ApproveRequest(Guid requestId)
+        {
+            Guard.ArgNotEmpty(requestId, nameof(requestId));
+
+            IIdentity requestIdentity = requestId.ToIdentity();
+            ProductRequest productRequest = requestRepository.GetEntityById(requestIdentity);
+            if (productRequest == null)
+            {
+                throw new Exception("Product request not found");
+            }
+
+            productRequest.Approve();
+
+            requestRepository.Update(productRequest);
+        }
+
+        public void MakeRequestOffer(Guid requestId, RequestOfferDto requestOfferDto)
+        {
+            Guard.ArgNotEmpty(requestId, nameof(requestId));
+            Guard.ArgNotEmpty(requestOfferDto, nameof(requestOfferDto));
+
+            IIdentity requestIdentity = requestId.ToIdentity();
+
+            ProductRequest productRequest = requestRepository.GetEntityById(requestIdentity);
+            if (productRequest == null)
+            {
+                throw new Exception("Product request not found");
+            }
+
+            RequestOffer requestOffer = new RequestOffer(requestOfferDto.Price);
+            productRequest.MakeRequestOffer(requestOffer);
+
+            requestRepository.Update(productRequest);
         }
     }
 }

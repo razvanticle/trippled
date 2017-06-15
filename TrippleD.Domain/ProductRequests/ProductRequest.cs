@@ -1,20 +1,33 @@
 ﻿using System;
-using TrippleD.Management.Domain.ProductRequests.Events;
+using TrippleD.Sales.Domain.ProductRequests.Events;
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Identities;
+using TrippleD.SharedKernel.Model;
 using TrippleD.SharedKernel.Model.ProductRequest;
 
-namespace TrippleD.Management.Domain.ProductRequests
+namespace TrippleD.Sales.Domain.ProductRequests
 {
     public class ProductRequest : AggregateRoot
     {
         private RequestOffer requestOffer;
 
-        public ProductRequest(IIdentity requestId, RequestStatus status, RequestOffer requestOffer) : base(requestId)
+        public ProductRequest(IIdentity requestId, IIdentity productId, IIdentity customerId, IIdentity companyId,
+            TimeInterval timeInterval) : base(requestId)
         {
-            Status = status;
-            this.requestOffer = requestOffer;
+            ProductId = productId;
+            CustomerId = customerId;
+            CompanyId = companyId;
+            TimeInterval = timeInterval;
+            Status = RequestStatus.Pending;
+
+            AddEvent(new RequestCreatedEvent(this));
         }
+
+        public IIdentity CompanyId { get; }
+
+        public IIdentity CustomerId { get; }
+
+        public IIdentity ProductId { get; }
 
         public RequestOffer RequestOffer
         {
@@ -31,6 +44,9 @@ namespace TrippleD.Management.Domain.ProductRequests
 
         public RequestStatus Status { get; private set; }
 
+        public TimeInterval TimeInterval { get; }
+
+
         public void Approve()
         {
             if (requestOffer == null)
@@ -40,6 +56,12 @@ namespace TrippleD.Management.Domain.ProductRequests
 
             Status = RequestStatus.Accepted;
             AddEvent(new RequestAprovedEvent(Id));
+        }
+
+        public void Cancel()
+        {
+            Status = RequestStatus.Canceled;
+            AddEvent(new RequestCanceledEvent(Id));
         }
 
         public void MakeRequestOffer(RequestOffer offer)

@@ -16,7 +16,7 @@ namespace TrippleD.Sales.Persistence
         {
             if (!store.Any<Company>())
             {
-                store.AddRange(new Company(Identity.Create())
+                store.AddRange(new Company(Identity.Create(Constants.CompanyIds.Company1))
                     {
                         Name = "Company 1",
                         Address = new Address("Cluj", "5", "Garibaldi"),
