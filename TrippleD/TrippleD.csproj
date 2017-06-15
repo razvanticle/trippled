@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ProductRequests\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +30,7 @@
     <ProjectReference Include="..\TrippleD.Sales.Application\TrippleD.Sales.Application.csproj" />
     <ProjectReference Include="..\TrippleD.Sales.Domain\TrippleD.Sales.Domain.csproj" />
     <ProjectReference Include="..\TrippleD.Sales.Persistence\TrippleD.Sales.Persistence.csproj" />
+    <ProjectReference Include="..\TrippleD.Sales.WebApi\TrippleD.Sales.WebApi.csproj" />
     <ProjectReference Include="..\TrippleD.SharedKernel\TrippleD.SharedKernel.csproj" />
   </ItemGroup>
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TrippleD.Core;
 using TrippleD.Persistence.Repository;
+using TrippleD.Sales.Application.ProductRequests.Dtos;
 using TrippleD.Sales.Domain.ProductRequests;
 using TrippleD.Sales.Domain.ProductRequests.Specifications;
 using TrippleD.SharedKernel;
@@ -16,7 +17,7 @@ namespace TrippleD.Sales.Application.ProductRequests
     public interface IProductRequestService
     {
         void CancelRequest(Guid requestId);
-        void RequestProduct(Guid productId, Guid customerId, Guid companyId, DateTime startDate, DateTime endDate);
+        void RequestProduct(ProductRequestDto productRequestDto);
     }
 
     [Service(typeof(IProductRequestService))]
@@ -45,15 +46,13 @@ namespace TrippleD.Sales.Application.ProductRequests
             requestRepository.Update(productRequest);
         }
 
-        public void RequestProduct(Guid productId, Guid customerId, Guid companyId, DateTime startDate,
-            DateTime endDate)
+        public void RequestProduct(ProductRequestDto productRequestDto)
         {
-            Guard.ArgNotEmpty(productId, nameof(productId));
-            Guard.ArgNotEmpty(customerId, nameof(customerId));
-
-            IIdentity productIdentity = productId.ToIdentity();
-            IIdentity customerIdentity = customerId.ToIdentity();
-            IIdentity companyIdentity = companyId.ToIdentity();
+            Guard.ArgNotNull(productRequestDto,nameof(productRequestDto));
+            
+            IIdentity productIdentity = productRequestDto.ProductId.ToIdentity();
+            IIdentity customerIdentity = productRequestDto.CustomerId.ToIdentity();
+            IIdentity companyIdentity = productRequestDto.CompanyId.ToIdentity();
 
             ISpecification<ProductRequest> requestByProductAndCustomer =
                 new ProductRequestByProductSpecification(productIdentity)
@@ -67,7 +66,7 @@ namespace TrippleD.Sales.Application.ProductRequests
                 throw new Exception("Request already exists");
             }
 
-            TimeInterval timeInterval = new TimeInterval(startDate, endDate);
+            TimeInterval timeInterval = new TimeInterval(productRequestDto.StartDate, productRequestDto.EndDate);
             ISpecification<ProductRequest> overlapingRequestSpecification =
                 new ProductRequestOverlapsTimeIntervalSpecification(timeInterval)
                     .And(new ProductRequestByCompanySpecification(companyIdentity))

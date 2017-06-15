@@ -8,4 +8,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TrippleD.Core\TrippleD.Core.csproj" />
+    <ProjectReference Include="..\TrippleD.Sales.Application\TrippleD.Sales.Application.csproj" />
+  </ItemGroup>
+
 </Project>
