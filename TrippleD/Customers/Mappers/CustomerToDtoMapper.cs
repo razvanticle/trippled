@@ -2,7 +2,7 @@
 using TrippleD.Core;
 using TrippleD.Core.Mappers;
 using TrippleD.Customers.Dtos;
-using TrippleD.Sales.Domain.Customers.Model;
+using TrippleD.Domain.Customers.Model;
 
 namespace TrippleD.Customers.Mappers
 {

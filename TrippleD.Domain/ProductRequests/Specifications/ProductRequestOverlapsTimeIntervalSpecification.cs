@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using TrippleD.SharedKernel.Model;
 using TrippleD.SharedKernel.Specifications;
 
-namespace TrippleD.Sales.Domain.ProductRequests.Specifications
+namespace TrippleD.Domain.ProductRequests.Specifications
 {
     public class ProductRequestOverlapsTimeIntervalSpecification : Specification<ProductRequest>
     {

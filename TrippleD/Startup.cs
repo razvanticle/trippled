@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TrippleD.Persistence;
 using TrippleD.Persistence.InMemoryStore;
 using TrippleD.ServicesConfiguration.Extensions;
 using TrippleD.ServicesConfiguration.RegistrationStrategies;
-using TrippleD.Sales.Persistence;
 
 namespace TrippleD
 {

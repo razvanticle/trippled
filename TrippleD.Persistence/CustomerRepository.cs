@@ -1,9 +1,9 @@
 ﻿using TrippleD.Core;
+using TrippleD.Domain.Customers.Model;
 using TrippleD.Persistence.Repository;
-using TrippleD.Sales.Domain.Customers.Model;
 using TrippleD.SharedKernel.EventDispatcher;
 
-namespace TrippleD.Sales.Persistence
+namespace TrippleD.Persistence
 {
     [Service(typeof(IEntityRepository<Customer>))]
     public class CustomerRepository:EntityRepository<Customer>

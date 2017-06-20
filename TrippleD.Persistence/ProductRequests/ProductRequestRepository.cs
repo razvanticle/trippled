@@ -1,9 +1,9 @@
 ﻿using TrippleD.Core;
+using TrippleD.Domain.ProductRequests;
 using TrippleD.Persistence.Repository;
-using TrippleD.Sales.Domain.ProductRequests;
 using TrippleD.SharedKernel.EventDispatcher;
 
-namespace TrippleD.Sales.Persistence.ProductRequests
+namespace TrippleD.Persistence.ProductRequests
 {
     [Service(typeof(IEntityRepository<ProductRequest>))]
     public class ProductRequestRepository : EntityRepository<ProductRequest>

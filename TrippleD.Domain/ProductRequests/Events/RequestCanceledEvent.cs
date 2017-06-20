@@ -1,8 +1,7 @@
-﻿
-using TrippleD.SharedKernel.Events;
+﻿using TrippleD.SharedKernel.Events;
 using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Sales.Domain.ProductRequests.Events
+namespace TrippleD.Domain.ProductRequests.Events
 {
     public class RequestCanceledEvent : DomainEvent
     {

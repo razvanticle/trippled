@@ -1,6 +1,6 @@
 ﻿using TrippleD.SharedKernel;
 
-namespace TrippleD.Sales.Domain.Companies.Model
+namespace TrippleD.Domain.Companies.Model
 {
     public class Service : ValueObjectBase<Service>
     {

@@ -1,8 +1,8 @@
-﻿using TrippleD.Sales.Domain.Companies.Model;
+﻿using TrippleD.Domain.Companies.Model;
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Model;
 
-namespace TrippleD.Sales.Domain.Customers.Model
+namespace TrippleD.Domain.Customers.Model
 {
     public class OrderItem : ValueObjectBase<OrderItem>
     {

@@ -2,7 +2,7 @@
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Sales.Domain.Customers.Model
+namespace TrippleD.Domain.Customers.Model
 {
     public class Order : Entity
     {

@@ -3,7 +3,7 @@ using TrippleD.Core;
 using TrippleD.SharedKernel.Events;
 using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Sales.Domain.Companies.Events
+namespace TrippleD.Domain.Companies.Events
 {
     public class ComanyRatingUpdatedEvent : DomainEvent
     {

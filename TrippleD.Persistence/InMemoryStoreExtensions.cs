@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using TrippleD.Persistence.InMemoryStore;
-using TrippleD.Sales.Domain.Companies.Model;
-using TrippleD.Sales.Domain.Customers.Model;
-using TrippleD.Sales.Domain.Products;
+using TrippleD.Domain.Companies.Model;
+using TrippleD.Domain.Customers.Model;
+using TrippleD.Domain.Products;
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Identities;
 using TrippleD.SharedKernel.Model;
 
-namespace TrippleD.Sales.Persistence
+namespace TrippleD.Persistence
 {
     public static class InMemoryStoreExtensions
     {
-        public static void EnsureSeedData(this InMemoryStore store)
+        public static void EnsureSeedData(this InMemoryStore.InMemoryStore store)
         {
             if (!store.Any<Company>())
             {

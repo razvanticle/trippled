@@ -1,7 +1,7 @@
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Sales.Domain.Companies.Model
+namespace TrippleD.Domain.Companies.Model
 {
     public class CompanySchedule:AggregateRoot
     {

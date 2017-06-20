@@ -2,8 +2,8 @@
 using TrippleD.Core.Extensions;
 using TrippleD.Core.Mappers;
 using TrippleD.Customers.Dtos;
-using TrippleD.Sales.Domain.Companies.Model;
-using TrippleD.Sales.Domain.Customers.Model;
+using TrippleD.Domain.Companies.Model;
+using TrippleD.Domain.Customers.Model;
 using TrippleD.SharedKernel.Dtos;
 using TrippleD.SharedKernel.Model;
 

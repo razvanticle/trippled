@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using TrippleD.Sales.Application.ProductRequests;
-using TrippleD.Sales.Application.ProductRequests.Dtos;
+using TrippleD.Application.ProductRequests;
+using TrippleD.Application.ProductRequests.Dtos;
 
-namespace TrippleD.Sales.WebApi.ProductRequests
+namespace TrippleD.WebApi.ProductRequests
 {
     [Route("api/productRequests")]
     public class ProductRequestController : Controller

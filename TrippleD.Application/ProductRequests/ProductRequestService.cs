@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TrippleD.Application.ProductRequests.Dtos;
 using TrippleD.Core;
+using TrippleD.Domain.ProductRequests;
+using TrippleD.Domain.ProductRequests.Specifications;
 using TrippleD.Persistence.Repository;
-using TrippleD.Sales.Application.ProductRequests.Dtos;
-using TrippleD.Sales.Domain.ProductRequests;
-using TrippleD.Sales.Domain.ProductRequests.Specifications;
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Extensions;
 using TrippleD.SharedKernel.Identities;
@@ -13,7 +13,7 @@ using TrippleD.SharedKernel.Model;
 using TrippleD.SharedKernel.Model.ProductRequest;
 using TrippleD.SharedKernel.Specifications;
 
-namespace TrippleD.Sales.Application.ProductRequests
+namespace TrippleD.Application.ProductRequests
 {
     public interface IProductRequestService
     {

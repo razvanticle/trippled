@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TrippleD.Domain\TrippleD.Domain.csproj" />
     <ProjectReference Include="..\TrippleD.SharedKernel\TrippleD.SharedKernel.csproj" />
   </ItemGroup>
 

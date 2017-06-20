@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using TrippleD.Core;
-using TrippleD.Sales.Domain.Customers.Events;
+using TrippleD.Domain.Customers.Events;
 using TrippleD.SharedKernel;
 using TrippleD.SharedKernel.Identities;
 
-namespace TrippleD.Sales.Domain.Customers.Model
+namespace TrippleD.Domain.Customers.Model
 {
     public class Customer : AggregateRoot
     {

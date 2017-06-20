@@ -1,4 +1,4 @@
-﻿namespace TrippleD.Sales.Application.ProductRequests.Dtos
+﻿namespace TrippleD.Application.ProductRequests.Dtos
 {
     public class RequestOfferDto
     {

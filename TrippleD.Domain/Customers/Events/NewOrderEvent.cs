@@ -1,7 +1,7 @@
-﻿using TrippleD.Sales.Domain.Customers.Model;
+﻿using TrippleD.Domain.Customers.Model;
 using TrippleD.SharedKernel.Events;
 
-namespace TrippleD.Sales.Domain.Customers.Events
+namespace TrippleD.Domain.Customers.Events
 {
     public class NewOrderEvent : DomainEvent
     {
